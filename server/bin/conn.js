@@ -34,6 +34,7 @@ function gitClearCache() {
   execSync(`git rm -r --cached .`, { stdio: "inherit", cwd: path.join(__dirname, './../../') });
 }
 
+
 function clientCommand() {
   prompts({
     type: "text",
