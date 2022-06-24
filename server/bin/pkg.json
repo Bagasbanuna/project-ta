@@ -1,0 +1,13 @@
+{
+    "pkg": [
+        "generate",
+        "run client",
+        "run server",
+        "prisma migrate",
+        "prisma generate",
+        "git push",
+        "git clear cache",
+        "client command",
+        "server command"
+    ]
+}
