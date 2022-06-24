@@ -1,0 +1,20 @@
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 3369
+Date: Tue, 19 Apr 2022 16:00:55 GMT
+Connection: close
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: <br>Invalid `prisma.rencanakerja.create()` invocation in<br>C:\Users\bagas\OneDrive\Documents\ProjectK\TA\controllers\rencanakerja.js:16:43<br><br> &nbsp;13 const CreateRencanakerja = expressAsyncHandler (async (req, res) =&gt;{<br> &nbsp;14 &nbsp; &nbsp; let {Id, title, tanggal, keterangan, status, userId} = req.body<br> &nbsp;15 &nbsp;<br>→ 16 &nbsp; &nbsp; let renja = await prisma.rencanakerja.create({<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: {<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Id: 1,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; title: &#39;Kajian Ahad&#39;,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tanggal: new Date(&#39;2022-04-01T00:00:00.000Z&#39;),<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; keterangan: &#39;Kajian diadakan di aula&#39;,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; status: &#39;Acc&#39;,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; userId: 1,<br> &nbsp; &nbsp; &nbsp; &nbsp; + &nbsp; createAt: DateTime,<br> &nbsp; &nbsp; &nbsp; &nbsp; + &nbsp; updateAt: DateTime,<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; files?: {<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; &nbsp; create?: filesCreateWithoutRencanakerjaInput | filesCreateWithoutRencanakerjaInput | filesUncheckedCreateWithoutRencanakerjaInput | filesUncheckedCreateWithoutRencanakerjaInput,<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; &nbsp; connectOrCreate?: filesCreateOrConnectWithoutRencanakerjaInput | filesCreateOrConnectWithoutRencanakerjaInput,<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; &nbsp; createMany?: filesCreateManyRencanakerjaInputEnvelope,<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; &nbsp; connect?: filesWhereUniqueInput | filesWhereUniqueInput<br> &nbsp; &nbsp; &nbsp; &nbsp; ? &nbsp; }<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br> &nbsp; &nbsp; &nbsp; &nbsp; })<br><br>Argument createAt for data.createAt is missing.<br>Argument updateAt for data.updateAt is missing.<br><br>Note: Lines with + are required, lines with ? are optional.<br><br> &nbsp; &nbsp;at Object.validate (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:38605:20)<br> &nbsp; &nbsp;at PrismaClient._executeRequest (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:40690:17)<br> &nbsp; &nbsp;at consumer (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:40634:23)<br> &nbsp; &nbsp;at C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:40638:76<br> &nbsp; &nbsp;at runInChildSpan (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:39882:12)<br> &nbsp; &nbsp;at C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:40638:20<br> &nbsp; &nbsp;at AsyncResource.runInAsyncScope (node:async_hooks:201:9)<br> &nbsp; &nbsp;at PrismaClient._request (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:40637:86)<br> &nbsp; &nbsp;at C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:37268:25<br> &nbsp; &nbsp;at _callback (C:\Users\bagas\OneDrive\Documents\ProjectK\TA\node_modules\@prisma\client\runtime\index.js:37032:52)</pre>
+</body>
+</html>

@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Roles {
+  id     Int     @id @default(autoincrement())
+  name   String?
+  User   user?   @relation(fields: [userId], references: [Id])
+  userId Int?
+}
+
+model user {
+  Id           Int            @id @default(autoincrement())
+  username     String
+  email        String
+  password     String
+  createAt     DateTime       @default(now())
+  updateAt     DateTime       @updatedAt
+  profile      profile?
+  rencanakerja rencanakerja[]
+  kritiksaran  kritiksaran[]
+  Roles        Roles[]
+}
+
+model profile {
+  Id            Int      @id @default(autoincrement())
+  nim           Int      @unique
+  namaDepan     String?
+  namaBelakang  String?
+  alamat        String?
+  tempatLahir   String?
+  tanggalLahir  String?
+  jenisKelamin  String?
+  nomorHp       String?
+  tahunAngkatan Int?
+  fotoKtp       String?
+  fotoProfile   String?
+  User          user?    @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId        Int?     @unique
+  jabatan       jabatan?
+  divisi        divisi?
+  jurusan       jurusan?
+}
+
+model jabatan {
+  Id          Int      @id @default(autoincrement())
+  namaJabatan String
+  Profile     profile? @relation(fields: [profileId], references: [Id])
+  profileId   Int?     @unique
+}
+
+model divisi {
+  Id         Int      @id @default(autoincrement())
+  namaDivisi String
+  Profile    profile? @relation(fields: [profileId], references: [Id])
+  profileId  Int?     @unique
+}
+
+model jurusan {
+  Id          Int      @id @default(autoincrement())
+  namaJurusan String
+  Profile     profile? @relation(fields: [profileId], references: [Id])
+  profileId   Int?     @unique
+}
+
+model rencanakerja {
+  Id          Int           @id @default(autoincrement())
+  title       String
+  tanggal     DateTime?
+  keterangan  String?
+  createAt    DateTime?     @default(now())
+  updateAt    DateTime?     @updatedAt
+  status      String?
+  User        user?         @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId      Int?
+  files       files[]
+  StatusRenja StatusRenja[]
+  gallery     gallery[]
+}
+
+// harus ada data jenis file
+model files {
+  Id             Int           @id @default(autoincrement())
+  file           String
+  createAt       DateTime      @default(now())
+  namaFile       namaFile?     @relation(fields: [namaFileId], references: [Id])
+  Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
+  rencanakerjaId Int?
+  namaFileId     Int?
+  // isImage Boolean @default(false)
+}
+
+//
+model namaFile {
+  Id       Int     @id @default(autoincrement())
+  namaFile String
+  filesId  Int?
+  files    files[]
+}  
+
+model gallery {
+  Id             Int           @id @default(autoincrement())
+  gambar         String
+  Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
+  rencanakerjaId Int?
+}
+
+model kritiksaran {
+  Id       Int    @id @default(autoincrement())
+  subjek   String
+  komentar String
+  User     user?  @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId   Int
+}
+
+model StatusRenja {
+  id             Int           @id @default(autoincrement())
+  name           String
+  // Setelah deklarasi relasi foreignkey lalu Alt+Shift+F
+  Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
+  rencanakerjaId Int?
+}

@@ -1,0 +1,8 @@
+{
+    
+    "camelCase": "camelCase untuk variabel, function",
+    "PascalCase": "PascalCase untuk class dan khusus react.js",
+    "snake_case": "snake_case untuk nama file dan folder",
+    "kebab-case": "kebab-case untuk alamat URL"
+}
+

@@ -1,0 +1,399 @@
+//USER
+### get user
+GET http://localhost:5000/api/v1/user HTTP/1.1
+
+### create user
+POST http://localhost:5000/api/v1/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "bagas",
+    "email": "bagas@gmail.com",
+    "password": "1234"
+}
+ 
+### update user
+POST http://localhost:5000/api/v1/user/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1,
+    "username": "bagas nusantara",
+    "email": "bagas@gmail.com",
+    "password": "1234"
+}
+
+### delete user
+POST http://localhost:5000/api/v1/user/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : ""
+} 
+
+
+// Registrasi
+### create registrasi
+POST http://localhost:5000/api/v1/registrasi HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "nabil",
+    "email": "bagas12@gmail.com",
+    "password": "1234"
+}
+
+// Login
+### create login
+POST http://localhost:5000/api/v1/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "password": "user1"
+}
+
+///User.Include///
+### get user include
+GET http://localhost:5000/api/v1/userInclude HTTP/1.1
+
+
+///////////////////////////////////////////
+/////AYO SEMANGAT/////
+//PROFILE
+### get profile
+GET http://localhost:5000/api/v1/profile HTTP/1.1
+
+### create profile
+POST http://localhost:5000/api/v1/profile HTTP/1.1
+Content-Type: application/json
+
+{
+    "nim": "1002",
+    "namaDepan": "abil",
+    "namaBelakang": "bagas",
+    "alamat": "jalan bali",
+    "tempatLahir": "jember",
+    "tanggalLahir": "10 mei 2000",
+    "jenisKelamin": "laki-laki",
+    "nomorHp": "082123456789",
+    "tahunAngkatan": "2018",
+    "fotoKtp": "fmisfmkmfkdmfk",
+    "fotoProfile": "Mkasnndnwdnad",
+    "userId": 1
+
+}
+
+### update profile
+POST http://localhost:5000/api/v1/profile/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "nim": "1001",
+    "namaDepan": "abil aja",
+    "namaBelakang": "bagas",
+    "alamat": "jalan bali dewata",
+    "tempatLahir": "jember",
+    "tanggalLahir": "10 mei 2000",
+    "jenisKelamin": "laki-laki",
+    "nomorHp": "082123456789",
+    "tahunAngkatan": "2018",
+    "fotoKtp": "fmisfmkmfkdmfk",
+    "fotoProfile": "Mkasnndnwdnad",
+    "userId": 1
+
+}
+
+### delete profile
+POST http://localhost:5000/api/v1/profile/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : ""
+}
+
+
+/////AYO SEMANGAT/////
+//JABATAN
+### get jabatan
+GET http://localhost:5000/api/v1/jabatan HTTP/1.1
+
+### create jabatan
+POST http://localhost:5000/api/v1/jabatan HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaJabatan": "Ketua",
+    "profileId": 1
+}
+
+### update jabatan
+POST http://localhost:5000/api/v1/jabatan/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaJabatan": "Ketua Umum",
+    "profileId": 1
+}
+
+### delete jabatan
+POST http://localhost:5000/api/v1/jabatan/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+
+/////AYO SEMANGAT/////
+//DIVISI
+### get divisi
+GET http://localhost:5000/api/v1/divisi HTTP/1.1
+
+### create divisi
+POST http://localhost:5000/api/v1/divisi HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaDivisi": "Inti",
+    "profileId": 1
+}
+
+### update divisi
+POST http://localhost:5000/api/v1/divisi/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaDivisi": "Inti jj aja",
+    "profileId": 1
+}
+
+### delete divisi
+POST http://localhost:5000/api/v1/divisi/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+
+
+//JURUSAN
+### get jurusan
+GET http://localhost:5000/api/v1/jurusan HTTP/1.1
+
+### create jurusan
+POST http://localhost:5000/api/v1/jurusan HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaJurusan": "TI MDI",
+    "profileId": 1
+}
+
+### update jurusan
+POST http://localhost:5000/api/v1/jurusan/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaJurusan": "TI DGM",
+    "profileId": 1
+}
+
+### delete jurusan
+POST http://localhost:5000/api/v1/jurusan/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+
+/////AYO SEMANGAT/////
+//Rencanakerja
+### get rencanakerja
+GET http://localhost:5000/api/v1/rencanakerja HTTP/1.1
+
+### create rencanakerja
+POST http://localhost:5000/api/v1/rencanakerja HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "title": "Kajian Subuh",
+    "tanggal": "2022-04-01",
+    "keterangan": "Kajian diadakan di masjid",
+    "status": "Pending",
+    "files":""
+}
+
+### update rencanakerja
+POST http://localhost:5000/api/v1/rencanakerja/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "title": "Kajian Pria",
+    "tanggal": "2022-04-01",
+    "keterangan": "Kajian diadakan di masjid",
+    "status": "Pending",
+    "userId": 1
+}
+
+### delete rencanakerja
+POST http://localhost:5000/api/v1/rencanakerja/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+### get rencanakerja_by_user
+GET http://localhost:5000/api/v1/rencanakerja-by-user/3 HTTP/1.1
+
+### get status_renja
+GET http://localhost:5000/api/v1/status-renja HTTP/1.1
+ 
+
+/////AYO SEMANGAT/////
+//FILES
+### get files
+GET http://localhost:5000/api/v1/files HTTP/1.1
+
+### create files
+POST http://localhost:5000/api/v1/files HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "file": "LPJ Semnas",
+    "rencanakerjaId": 1,
+    "namaFileId": 1
+}
+
+### update files
+POST http://localhost:5000/api/v1/files/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "file": "LPJ Semnas aja",
+    "rencanakerjaId": 1,
+    "namaFileId": 1
+}
+
+### delete files
+POST http://localhost:5000/api/v1/files/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+/////AYO SEMANGAT/////
+//namaFileS
+### get namaFile
+GET http://localhost:5000/api/v1/namaFile HTTP/1.1
+
+### create namaFile
+POST http://localhost:5000/api/v1/namaFile HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaFile": "BA",
+    "filesId": 1
+}
+
+### update namaFile
+POST http://localhost:5000/api/v1/namaFile/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "namaFile": "Proposal",
+    "filesId": 1
+}
+
+### delete namaFile
+POST http://localhost:5000/api/v1/namaFile/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+/////AYO SEMANGAT/////
+//GALLERY
+### get gallery
+GET http://localhost:5000/api/v1/gallery HTTP/1.1
+
+### create gallery
+POST http://localhost:5000/api/v1/gallery HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "gambar": "rewofkmmfqeofo",
+    "filesId": 1
+}
+
+### update gallery
+POST http://localhost:5000/api/v1/gallery/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "gambar": "ttttwdbw",
+    "filesId": 1
+}
+
+### delete gallery
+POST http://localhost:5000/api/v1/gallery/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}
+
+/////AYO SEMANGAT/////
+//KRITIKSARAN
+### get kritiksaran
+GET http://localhost:5000/api/v1/kritiksaran HTTP/1.1
+
+### create kritiksaran
+POST http://localhost:5000/api/v1/kritiksaran HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "subjek": "Kamar mandi",
+    "komentar": "Jangan lupa bersihkan",
+    "userId": 1
+}
+
+### update kritiksaran
+POST http://localhost:5000/api/v1/kritiksaran/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "subjek": "Kamar aja",
+    "komentar": "Jangan lupa bersihkan",
+    "userId": 1
+}
+
+### delete kritiksaran
+POST http://localhost:5000/api/v1/kritiksaran/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "Id" : 1
+}

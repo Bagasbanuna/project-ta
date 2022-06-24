@@ -26,12 +26,12 @@ function prismaGenerate() {
 function gitPush() {
   execSync(`git add . && git commit -m 'apa' && git push origin main`, {
     stdio: "inherit",
-    cwd: __dirname,
+    cwd: path.join(__dirname, "./../../"),
   });
 }
 
 function gitClearCache() {
-  execSync(`git rm -r --cached .`, { stdio: "inherit", cwd: __dirname });
+  execSync(`git rm -r --cached .`, { stdio: "inherit", cwd: path.join(__dirname, './../../') });
 }
 
 function clientCommand() {
