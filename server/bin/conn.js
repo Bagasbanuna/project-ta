@@ -5,7 +5,7 @@ const _client = path.join(__dirname, "./../../client");
 const _server = path.join(__dirname, "./../../server");
 
 function runClient() {
-  execSync(`npm run`, { stdio: "inherit", cwd: _client });
+  execSync(`npm start`, { stdio: "inherit", cwd: _client });
 }
 
 function runServer() {
