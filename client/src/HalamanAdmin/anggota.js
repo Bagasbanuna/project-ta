@@ -110,25 +110,35 @@ function IsiAgt({ state }) {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Aksi</th>
               <th>NIM</th>
               <th>Nama Depan</th>
-              <th>Nama Belakang</th>
+              {/* <th>Nama Belakang</th> */}
               <th>Alamat</th>
               <th>Tempat Lahir</th>
               <th>Tanggal Lahir</th>
-              <th>Jenis Kelamin</th>
-              <th>Nomor HP</th>
+              {/* <th>Jenis Kelamin</th>
+              <th>Nomor HP</th> */}
               <th>Angkatan</th>
               <th>Foto</th>
               <th>Foto KTP</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
             {state.Agt.map((a) => {
               return (
                 <tr key={a.Id}>
-                  
+                  <td>{antiNull(a, "nim")}</td>
+                  <td>{antiNull(a, "namaDepan")}</td>
+                  {/* <td>{antiNull(a,"namaBelakang")}</td> */}
+                  <td>{antiNull(a, "alamat")}</td>
+                  <td>{antiNull(a, "tempatLahir")}</td>
+                  <td>{antiNull(a, "tanggalLahir")}</td>
+                  {/* <td>{antiNull(a,"jenisKelamin")}</td>
+                  <td>{antiNull(a,"nomorHp")}</td> */}
+                  <td>{antiNull(a, "tahunAngkatan")}</td>
+                  <td>{antiNull(a, "fotoKtp")}</td>
+                  <td>{antiNull(a, "fotoProfile")}</td>
                   <td>
                     <Tombol
                       title={"Edit"}
@@ -143,17 +153,6 @@ function IsiAgt({ state }) {
 
                     <Tombol title={"Hapus"} warna={"danger"} />
                   </td>
-                  <td>{antiNull(a,"nim")}</td>
-                  <td>{antiNull(a,"namaDepan")}</td>
-                  <td>{antiNull(a,"namaBelakang")}</td>
-                  <td>{antiNull(a,"alamat")}</td>
-                  <td>{antiNull(a,"tempatLahir")}</td>
-                  <td>{antiNull(a,"tanggalLahir")}</td>
-                  <td>{antiNull(a,"jenisKelamin")}</td>
-                  <td>{antiNull(a,"nomorHp")}</td>
-                  <td>{antiNull(a,"tahunAngkatan")}</td>
-                  <td>{antiNull(a,"fotoKtp")}</td>
-                  <td>{antiNull(a,"fotoProfile")}</td>
                 </tr>
               );
             })}
@@ -164,11 +163,11 @@ function IsiAgt({ state }) {
   );
 }
 
-function antiNull(data, value){
+function antiNull(data, value) {
   try {
-    return data.profile[value]
+    return data.profile[value];
   } catch (error) {
-    return "null"
+    return "null";
   }
 }
 
@@ -182,12 +181,10 @@ class App extends Component {
     this.state = { Agt: Agt, updateAgt };
     this.updateState = this.updateState.bind(this);
 
-    axios
-      .get("http://localhost:5000/api/v1/userInclude")
-      .then((a)=> {
-        console.log(a.data)
-        this.updateState(a.data)
-      });
+    axios.get("http://localhost:5000/api/v1/userInclude").then((a) => {
+      console.log(a.data);
+      this.updateState(a.data);
+    });
   }
   updateState(b) {
     this.setState({
@@ -195,10 +192,12 @@ class App extends Component {
     });
   }
 
-  
-
   render() {
-    return this.state.Agt == null? (<div>data kosong</div>): (<IsiAgt state={this.state} />);
+    return this.state.Agt == null ? (
+      <div>data kosong</div>
+    ) : (
+      <IsiAgt state={this.state} />
+    );
   }
 }
 

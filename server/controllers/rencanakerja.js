@@ -24,25 +24,17 @@ const GetRencanakerja = expressAsyncHandler(async (req, res) => {
           },
         },
       },
-      
+      gallery: {
+        select: {
+          Id: true,
+          gambar: true,
+        },
+      },
     },
   });
 
   res.json(renja);
 });
-
-// const CreateFile = expressAsyncHandler(async (req, res) => {
-//   let body = req.body;
-
-//   let file = await prisma.files.create({
-//     data: {
-//       file: body.file,
-//     },
-//   });
-
-//   console.log(file)
-//   res.json(file)
-// });
 
 const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
   let body = req.body;
@@ -56,28 +48,26 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
     });
   }
 
-  if (body.gambar) {
-    let gambar = await prisma.gallery.create({
-      data: {
-        gambar: body.gambar,
-      },
-    });
-  }
+  let gambar = await prisma.gallery.create({
+    data: {
+      gambar: body.gambar,
+    },
+  });
 
   let renja = await prisma.rencanakerja.create({
     data: {
       title: body.title,
       tanggal: new Date(body.tanggal),
       keterangan: body.keterangan,
-      userId: body.userId,
-
-      files: {
-        
+      // files: {
+      //   connect: {
+      //    Id: file.Id
+      //   },
+      // },
+      gallery: {
         connect: {
-          Id: file.Id,
-          
+          Id: gambar.Id,
         },
-        
       },
     },
   });
@@ -86,11 +76,12 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
     sukes: "iya",
     data: {
       renja: renja,
-      file: file,
+      gambar: gambar,
     },
   };
 
-  res.status(200).json(bd);
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  // res.status(200).json(bd);
 
   // let renja = await prisma.rencanakerja.create({
   //     data: {

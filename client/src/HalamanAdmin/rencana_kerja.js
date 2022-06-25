@@ -70,20 +70,20 @@ var IniFile = [
   },
 ];
 
+function antiNull(data){
+  try {
+    return data.gallery[0].gambar
+  } catch (error) {
+    return "kosong.jpg"
+  }
+}
+
 class RenjaByUser extends Component {
+
   constructor(props) {
     try {
       let adaUser = window.localStorage.getItem("user");
       let iniUser = JSON.parse(adaUser).Id;
-
-      // console.log(iniUser)
-      // axios
-      //   .get("http://localhost:5000/api/v1/rencanakerja-by-user/" + iniUser)
-      //   .then((r) => {
-      //     console.log(r.data);
-      //     this.updateRenja(r.data);
-      //   });
-      //   console.log("mantappp")
 
       axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
         console.log(a.data);
@@ -95,11 +95,6 @@ class RenjaByUser extends Component {
       //   this.updateStatus(e.data);
       // });
 
-      // axios.get("http://localhost:5000/api/v1/files").then((f) => {
-      //   console.log(f.data);
-      //   this.updateFile(f.data);
-      // });
-
       super(props);
 
       /**@type {User} */
@@ -108,18 +103,11 @@ class RenjaByUser extends Component {
       // /**@type {Status} */
       // let StatusRenja = [];
 
-      // /**@type {IniFile} */
-      // let AdaFile = [];
-
       this.state = {
         Renja: Renja,
-        // StatusRenja,
-        // AdaFile,
       };
 
       this.updateRenja = this.updateRenja.bind(this);
-      // this.updateStatus = this.updateStatus.bind(this);
-      // this.updateFile = this.updateFile.bind(this);
     } catch (error) {
       console.log("hahahah werror");
     }
@@ -130,18 +118,6 @@ class RenjaByUser extends Component {
       Renja: a,
     });
   }
-
-  // updateStatus(b) {
-  //   this.setState({
-  //     StatusRenja: b,
-  //   });
-  // }
-
-  // updateFile(f) {
-  //   this.setState({
-  //     AdaFile: f,
-  //   });
-  // }
 
   render() {
     return <IsiRenja state={this.state} />;
@@ -160,40 +136,43 @@ function IsiRenja({ state }) {
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Rencana Kerja </h1>
         <div className="btn-toolbar mb-2 mb-md-0">
-          <div className="btn-group me-2"></div>
+          <div className="btn-group me-2">
+            <img src="http://localhost:5000/images/b09e-7b6f9468c305IMG_20200507_180659.jpg"></img>
+          </div>
         </div>
       </div>
       <div>
-        <TambahRenja />
+        {/* <TambahRenja /> */}
+        <Tombol
+          title={"Tambah"}
+          warna={"primary"}
+          onClick={() => {
+            nav("/halaman-admin/halaman-tambah-renja");
+          }}
+        />
 
         <table className="table table-striped " style={{ width: "3000" }}>
-          <thead>
+          <thead className="text-center">
             <tr>
               <th>Judul</th>
               <th>Tanggal Kegiatan</th>
               <th>Keterangan</th>
-              <th>File</th>
+              <th>Gambar</th>
               <th>Status</th>
 
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {state.Renja.map((r) => {
+            {state.Renja.map((a) => {
               return (
-                <tr key={r.Id}>
-                  <td>{r.title}</td>
-                  <td>{r.tanggal}</td>
-                  <td>{r.keterangan}</td>
+                <tr key={a.Id}>
+                  <td>{a.title}</td>
+                  <td>{a.tanggal}</td>
+                  <td>{a.keterangan}</td>
                   <td>
-                    {r.files.map((r) => {
-                      <div key={r.Id}>
-                        <div>
-                        {console.log(r.file)}
-                        </div>
-                        
-                      </div>;
-                    })}
+                    
+                    <img style={{height: 50}} src={"http://localhost:5000/images/"+antiNull(a)} />
                   </td>
                   {/* <td>
                     {state.AdaFile.map((f) => {
@@ -266,6 +245,7 @@ function IsiRenja({ state }) {
   );
 }
 
+///// GAK DI PAKEK
 const Isi = {
   title: "",
   tanggal: "",
