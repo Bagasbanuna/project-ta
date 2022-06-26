@@ -3,6 +3,7 @@ import { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tombol } from "../lib/button";
 import { MyForm } from "../lib/form";
+import { ambilDataRenja } from "./load_data";
 import { FileUpload } from "./upload_file";
 import { ImageUpload } from "./upload_image";
 
@@ -93,7 +94,9 @@ function TambahRenja() {
                 .post("http://localhost:5000/api/v1/rencanakerja", Isi)
                 .then((e) => {
                   console.log(e);
+                  
                 });
+              ambilDataRenja();
               nav("/halaman-admin/halaman-rencana-kerja");
             }}
           />

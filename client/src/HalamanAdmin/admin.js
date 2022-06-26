@@ -1,10 +1,18 @@
+import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { listRenja } from "../store";
+import { ambilDataRenja } from "./load_data";
 import { MainAdmin } from "./main_admin";
 import { Sidebar } from "./sidebar";
 
+
+ambilDataRenja()
+
 function HalamanAdmin() {
   let nav = useNavigate();
+  listRenja.init()
+ 
   return (
     <div className="">
       <header className="navbar navbar-dark bg-dark flex-md-nowrap p-0 mb-0 shadow ">

@@ -2,10 +2,13 @@ import { Component } from "react";
 import { Tombol } from "../lib/button";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Modal2, MyModal } from "../lib/modal";
-import { MyForm } from "../lib/form";
+
 import { FileUpload } from "./upload_file";
 import { ImageUpload } from "./upload_image";
+import { listRenja, orang, store } from "../store";
+import { ambilDataRenja } from "./load_data";
+
+ambilDataRenja();
 
 var User = [
   {
@@ -70,33 +73,52 @@ var IniFile = [
   },
 ];
 
-function antiNull(data){
+function antiNull(data) {
   try {
-    return data.gallery[0].gambar
+    return data.gallery[0].gambar;
   } catch (error) {
-    return "kosong.jpg"
+    return "kosong.jpg";
   }
 }
 
-class RenjaByUser extends Component {
+let berapa = 0;
 
+function Wadah({ component }) {
+  orang.init();
+
+  return (
+    <div style={{ marginLeft: 300 }}>
+      <h1>kjbhckmslackjsavbhkml {orang.val}</h1>
+      <button
+        onClick={() => {
+          berapa++;
+          orang.val = berapa;
+        }}
+      >
+        tekan disini aja{" "}
+      </button>
+    </div>
+  );
+}
+
+class RenjaByUser extends Component {
   constructor(props) {
     try {
       let adaUser = window.localStorage.getItem("user");
       let iniUser = JSON.parse(adaUser).Id;
 
-      axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
-        console.log(a.data);
-        this.updateRenja(a.data);
-      });
-
+      super(props);
+      // axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
+      //   console.log(a.data);
+      //   this.updateRenja(a.data);
+      // });
+      
       // axios.get("http://localhost:5000/api/v1/status-renja").then((e) => {
       //   console.log(e.data);
       //   this.updateStatus(e.data);
       // });
-
-      super(props);
-
+      
+      this.AmbilData();
       /**@type {User} */
       let Renja = [];
 
@@ -113,11 +135,21 @@ class RenjaByUser extends Component {
     }
   }
 
+  // Data nya gk perlu ambil disini karena sudah di deklarasikan dengan function lain di file load_data
+  AmbilData() {
+    // axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
+    //   //orang.val = JSON.stringify(a)
+    //   listRenja.val = a.data
+    // });
+  }
+
   updateRenja(a) {
     this.setState({
       Renja: a,
     });
   }
+
+  berapa = 0;
 
   render() {
     return <IsiRenja state={this.state} />;
@@ -128,16 +160,17 @@ const newStatus = {
   statusR: "",
 };
 
-function IsiRenja({ state }) {
+function IsiRenja() {
   let nav = useNavigate();
-
+  listRenja.init();
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Rencana Kerja </h1>
+
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <img src="http://localhost:5000/images/b09e-7b6f9468c305IMG_20200507_180659.jpg"></img>
+            {/* <img src="http://localhost:5000/images/b09e-7b6f9468c305IMG_20200507_180659.jpg"></img> */}
           </div>
         </div>
       </div>
@@ -164,30 +197,18 @@ function IsiRenja({ state }) {
             </tr>
           </thead>
           <tbody>
-            {state.Renja.map((a) => {
+            {listRenja.val.map((a) => {
               return (
                 <tr key={a.Id}>
                   <td>{a.title}</td>
-                  <td>{a.tanggal}</td>
+                  <td>{new Date(a.tanggal).toDateString()}</td>
                   <td>{a.keterangan}</td>
                   <td>
-                    
-                    <img style={{height: 50}} src={"http://localhost:5000/images/"+antiNull(a)} />
+                    <img
+                      style={{ height: 50 }}
+                      src={"http://localhost:5000/images/" + antiNull(a)}
+                    />
                   </td>
-                  {/* <td>
-                    {state.AdaFile.map((f) => {
-                      return (
-                        <div key={f.Id}>
-                          <a
-                            target={"_blank"}
-                            href={"http://localhost:5000/images/" + f.file}
-                          >
-                            {f.file}
-                          </a>
-                        </div>
-                      );
-                    })}
-                  </td> */}
 
                   {/* <td>
                     <select
