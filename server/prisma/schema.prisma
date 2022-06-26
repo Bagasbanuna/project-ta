@@ -72,18 +72,19 @@ model jurusan {
 }
 
 model rencanakerja {
-  Id          Int           @id @default(autoincrement())
-  title       String
-  tanggal     DateTime?
-  keterangan  String?
-  createAt    DateTime?     @default(now())
-  updateAt    DateTime?     @updatedAt
-  status      String?
-  User        user?         @relation(fields: [userId], references: [Id], onDelete: NoAction)
-  userId      Int?
-  files       files[]
-  StatusRenja StatusRenja[]
-  gallery     gallery[]
+  Id            Int          @id @default(autoincrement())
+  title         String
+  tanggal       DateTime?
+  keterangan    String?
+  createAt      DateTime?    @default(now())
+  updateAt      DateTime?    @updatedAt
+  status        String?
+  User          user?        @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId        Int?
+  files         files[]
+  gallery       gallery[]
+  StatusRenja   StatusRenja? @relation(fields: [statusRenjaId], references: [id])
+  statusRenjaId Int?
 }
 
 // harus ada data jenis file
@@ -104,7 +105,7 @@ model namaFile {
   namaFile String
   filesId  Int?
   files    files[]
-}  
+}
 
 model gallery {
   Id             Int           @id @default(autoincrement())
@@ -122,9 +123,8 @@ model kritiksaran {
 }
 
 model StatusRenja {
-  id             Int           @id @default(autoincrement())
-  name           String
+  id   Int    @id @default(autoincrement())
+  name String
   // Setelah deklarasi relasi foreignkey lalu Alt+Shift+F
-  Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
-  rencanakerjaId Int?
+  rencanakerja rencanakerja[]
 }

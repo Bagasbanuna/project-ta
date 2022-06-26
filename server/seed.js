@@ -2,24 +2,24 @@ const { PrismaClient } = require("@prisma/client");
 const { date } = require("prompts/dist/prompts");
 const prisma = new PrismaClient();
 
-
-//     {
-//         "id": 1,
-//         "name": "guess"
-//     },
-//     {
-//         "id": 2,
-//         "name": "user"
-//     },
-//     {
-//         "id": 3,
-//         "name": "admin"
-//     },
-//     {
-//         "id": 4,
-//         "name": "super admin"
-//     }
-// ]
+const MyStatus = [
+    {
+      "id": 1,
+      "name": "On Progress",
+    },
+    {
+      "id": 2,
+      "name": "Accept",
+    },
+    {
+      "id": 3,
+      "name": "Done",
+    },
+    {
+      "id": 4,
+      "name": "Cencel",
+    },
+  ];
 
 const listJabatan = [
     {
@@ -172,8 +172,32 @@ let rencanakerja = {
     "files": ""
 }
 
+let status = {
+    "id": "",
+    "name": ""
+}
+
+
+
 
 async function Coba() {
+
+    for (let status of MyStatus){
+        await prisma.statusRenja.upsert({
+            where: {
+                id: status.id
+            },
+            create: {
+                id: status.id,
+                name: status.name
+            },
+            update: {
+                name: status.name
+            }
+        })
+    }
+    console.log("Status seed berhasil")
+
     for (let jabatan of listJabatan) {
         await prisma.jabatan.upsert({
             where: {
@@ -336,9 +360,6 @@ async function Coba() {
         indexProfile++;
     }
     console.log("seed profile berhasil")
-
-
-
 }
 
 Coba();

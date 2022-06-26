@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { FileUpload } from "./upload_file";
 import { ImageUpload } from "./upload_image";
-import { listRenja, orang, store } from "../store";
-import { ambilDataRenja } from "./load_data";
+import { listRenja, listStatus, orang, store } from "../store";
+import { ambilDataRenja, statusRenja } from "./load_data";
 
+
+//Ambil data dari load data
 ambilDataRenja();
+statusRenja()
 
 var User = [
   {
@@ -41,25 +44,6 @@ var User = [
         },
       },
     ],
-  },
-];
-
-var Status = [
-  {
-    id: 1,
-    name: "On Progress",
-  },
-  {
-    id: 2,
-    name: "Accept",
-  },
-  {
-    id: 3,
-    name: "Done",
-  },
-  {
-    id: 4,
-    name: "Cencel",
   },
 ];
 
@@ -112,12 +96,12 @@ class RenjaByUser extends Component {
       //   console.log(a.data);
       //   this.updateRenja(a.data);
       // });
-      
+
       // axios.get("http://localhost:5000/api/v1/status-renja").then((e) => {
       //   console.log(e.data);
       //   this.updateStatus(e.data);
       // });
-      
+
       this.AmbilData();
       /**@type {User} */
       let Renja = [];
@@ -156,17 +140,16 @@ class RenjaByUser extends Component {
   }
 }
 
-const newStatus = {
-  statusR: "",
-};
-
 function IsiRenja() {
   let nav = useNavigate();
   listRenja.init();
+  listStatus.init();
+
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Rencana Kerja </h1>
+        {/* {JSON.stringify(listStatus.val)} */}
 
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
@@ -192,7 +175,6 @@ function IsiRenja() {
               <th>Keterangan</th>
               <th>Gambar</th>
               <th>Status</th>
-
               <th>Aksi</th>
             </tr>
           </thead>
@@ -205,39 +187,31 @@ function IsiRenja() {
                   <td>{a.keterangan}</td>
                   <td>
                     <img
-                      style={{ height: 50 }}
+                      style={{ height: 100 }}
                       src={"http://localhost:5000/images/" + antiNull(a)}
                     />
                   </td>
+                  <td>
+                    <select>
 
-                  {/* <td>
-                    <select
-                      onChange={(c) => {
-                        newStatus["statusR"] = c.target.value;
-                        console.log(newStatus);
-                      }}
-                    >
-                      {state.StatusRenja.map((e) => {
-                        return console.log(e);
-                      })}
+                    {listStatus.val.map((s) => {
+                      return(
+                        <option key={s.id}>
+                          {s.name}
+                        </option>
+                      )
+                      
+                    })}
                     </select>
-                    <hr />
-                    <Tombol
-                      title={"Ganti"}
-                      warna={"success"}
-                      onClick={() => {
-                        console.log(newStatus.statusR);
 
-                        axios
-                          .post("/status-renja/update", newStatus)
-                          .then((e) => {
-                            console.log(e);
-                          });
-                      }}
-                    />
-                  </td> */}
+                    {/* <select className="form-select" name="" id="">
+                      <option value={"On Progres"}>On Progres</option>
+                      <option value={"Accpet"}>Accpet</option>
+                      <option value={"Done"}>Done</option>
+                      <option value={"Cancel"}>Cancel</option> 
+                    </select>                     */}
+                  </td>
 
-                  <td>Status</td>
                   <td>
                     <div className="row">
                       <div className="col-sm">
@@ -248,9 +222,14 @@ function IsiRenja() {
                           title={"Hapus"}
                           warna={"danger"}
                           onClick={() => {
-                            axios.delete(
-                              "http://localhost:5000/api/v1/rencanakerja/delete"
-                            );
+                            axios
+                              .delete(
+                                "http://localhost:5000/api/v1/rencanakerja/delete" +
+                                  a.rencanakerja.Id
+                              )
+                              .then((a) => {
+                                console.log(a);
+                              });
                           }}
                         />
                       </div>
@@ -354,6 +333,42 @@ function TambahRenja() {
   );
 }
 
+{
+  /* <td>
+                    <select
+                    onChange={(c) =>{
+                      newStatus["MyStatus"] = c.target.value
+                      console.log(newStatus)
+
+                    }}            
+  
+                    >
+                      {/* {listRenja.val.map((e) => {
+                        return console.log(e);
+                      })} */
+}
+{
+  /* </select>
+                    <hr /> */
+}
+{
+  /* <Tombol
+                      title={"Ganti"}
+                      warna={"success"}
+                      onClick={() => {
+                        console.log(newStatus.MyStatus);
+
+                        axios
+                          .post("/status-renja/update", newStatus)
+                          .then((e) => {
+                            console.log(e);
+                          });
+                      }}
+                    /> */
+}
+{
+  /* </td> */
+}
 {
   /* <MyForm
             items={["title", "tanggal", "keterangan"]}

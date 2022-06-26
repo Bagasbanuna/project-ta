@@ -36,6 +36,7 @@ const GetRencanakerja = expressAsyncHandler(async (req, res) => {
   res.json(renja);
 });
 
+
 const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
   let body = req.body;
   console.log(body);
@@ -54,6 +55,12 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
     },
   });
 
+  let status = await prisma.statusRenja.create({
+    data: {
+      name: body.name
+    }
+  })
+
   let renja = await prisma.rencanakerja.create({
     data: {
       title: body.title,
@@ -69,6 +76,12 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
           Id: gambar.Id,
         },
       },
+      StatusRenja: {
+        connect: {
+          id: status.id
+        }
+      }
+
     },
   });
 
@@ -134,6 +147,17 @@ const DeleteRencanakerja = expressAsyncHandler(async (req, res) => {
   });
   res.json(renja);
 });
+
+const GetRenjaOn = expressAsyncHandler(async (req, res) => {
+  let renja = await prisma.rencanakerja.findMany({
+    where: {
+      
+    }
+
+  })
+
+})
+
 
 module.exports = {
   GetRencanakerja,

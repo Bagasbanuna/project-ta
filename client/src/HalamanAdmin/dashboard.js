@@ -10,7 +10,7 @@ function Dashboard(){
                 <h1 className="h2">Dashboard
                 
                 </h1>
-                {JSON.stringify(listRenja.val, null, 2)}
+                {/* {JSON.stringify(listRenja.val, null, 2)} */}
                 <div className="btn-toolbar mb-2 mb-md-0">
                     <div className="btn-group me-2">
                         {/* <button type="button" className="btn btn-sm btn-outline-secondary">Share</button>
