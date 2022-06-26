@@ -5,13 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { FileUpload } from "./upload_file";
 import { ImageUpload } from "./upload_image";
-import { listRenja, listStatus, orang, store } from "../store";
-import { ambilDataRenja, statusRenja } from "./load_data";
+import { listRenja, listStatus, orang, renjaOn, store } from "../store";
+import { ambilDataRenja, statusRenja, statusRenjaOn } from "./load_data";
 
 
 //Ambil data dari load data
 ambilDataRenja();
 statusRenja()
+statusRenjaOn()
 
 var User = [
   {
@@ -144,12 +145,14 @@ function IsiRenja() {
   let nav = useNavigate();
   listRenja.init();
   listStatus.init();
+  renjaOn.init()
 
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Rencana Kerja </h1>
         {/* {JSON.stringify(listStatus.val)} */}
+        {JSON.stringify(renjaOn.val)}
 
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">

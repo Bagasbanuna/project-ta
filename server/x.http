@@ -260,7 +260,9 @@ GET http://localhost:5000/api/v1/rencanakerja-by-user/3 HTTP/1.1
 
 ### get status_renja
 GET http://localhost:5000/api/v1/status-renja HTTP/1.1
- 
+
+### get statuson
+GET http://localhost:5000/api/v1/rencanakerja/statuson HTTP/1.1
 
 /////AYO SEMANGAT/////
 //FILES

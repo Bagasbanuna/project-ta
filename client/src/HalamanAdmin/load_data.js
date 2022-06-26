@@ -1,5 +1,5 @@
 import axios from "axios";
-import { listRenja, listStatus } from "../store";
+import { listRenja, listStatus, renjaOn } from "../store";
 
 function ambilDataRenja() {
   axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
@@ -15,6 +15,13 @@ function statusRenja() {
   })
 }
 
-export {ambilDataRenja ,  statusRenja}
+function statusRenjaOn() {
+  axios.get("http://localhost:5000/api/v1/rencanakerja/statuson").then((son) =>{
+    renjaOn.val = son.data
+    console.log(son.data)
+  })
+}
+
+export {ambilDataRenja ,  statusRenja, statusRenjaOn}
 
 

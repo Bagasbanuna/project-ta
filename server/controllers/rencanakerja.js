@@ -151,17 +151,47 @@ const DeleteRencanakerja = expressAsyncHandler(async (req, res) => {
 const GetRenjaOn = expressAsyncHandler(async (req, res) => {
   let renja = await prisma.rencanakerja.findMany({
     where: {
-      
+      statusRenjaId: 1,
+          
     }
-
   })
-
+  res.json(renja)
 })
 
+const GetRenjaAcc = expressAsyncHandler(async (req, res) => {
+  let renja = await prisma.rencanakerja.findMany({
+    where: {
+      statusRenjaId: 2
+    }
+  })
+  res.json(renja)
+})
+
+const GetRenjaDone = expressAsyncHandler(async (req, res) =>{
+  let renja = await prisma.rencanakerja.findMany({
+    where: {
+      statusRenjaId: 3
+    }
+  })
+  res.json(renja)
+})
+
+const GetRenjaCancel = expressAsyncHandler(async (req, res) => {
+  let renja = await prisma.rencanakerja.findMany({
+    where: {
+      statusRenjaId: 4
+    }
+  })
+  res.json(renja)
+})
 
 module.exports = {
   GetRencanakerja,
   CreateRencanakerja,
   UpdateRencanakerja,
   DeleteRencanakerja,
+  GetRenjaOn,
+  GetRenjaAcc,
+  GetRenjaDone,
+  GetRenjaCancel
 };

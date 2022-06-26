@@ -9,7 +9,7 @@ const { GetKritiksaran, CreateKritiksaran, UpdateKritiksaran, DeleteKritiksaran 
 const { CreateLogin } = require("./controllers/login");
 const { GetProfile, CreateProfile, UpdateProfile, DeleteProfile } = require("./controllers/profile");
 const { CreateRegistrasi } = require("./controllers/registrasi");
-const { GetRencanakerja, CreateRencanakerja, UpdateRencanakerja, DeleteRencanakerja } = require("./controllers/rencanakerja");
+const { GetRencanakerja, CreateRencanakerja, UpdateRencanakerja, DeleteRencanakerja, GetRenjaOn, GetRenjaAcc, GetRenjaDone, GetRenjaCancel } = require("./controllers/rencanakerja");
 const { GetRenjaByUser } = require("./controllers/rencanakerja_by_user");
 const { routeStatusRenja, UpdateStatus } = require("./controllers/status_renja");
 const { GetUser, CreateUser, UpdateUser, DeleteUser } = require("./controllers/users");
@@ -53,6 +53,11 @@ api.post('/jurusan/delete', DeleteJurusan)
 // status renja
 api.use('/status-renja', routeStatusRenja)
 api.post('/status-renja/update', UpdateStatus)
+
+api.get('/rencanakerja/statuson' , GetRenjaOn)
+api.get('/rencanakerja/statusacc', GetRenjaAcc)
+api.get('/rencanakerja/statusdone', GetRenjaDone)
+api.get('/rencanakerja/statuscancel', GetRenjaCancel)
 
 //rencanakerja
 api.get('/rencanakerja', GetRencanakerja)
