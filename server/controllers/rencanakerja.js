@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const expressAsyncHandler = require("express-async-handler");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
-const { data } = require("jquery");
+const { data, expr } = require("jquery");
 const prisma = new PrismaClient();
 
 const GetRencanakerja = expressAsyncHandler(async (req, res) => {
@@ -117,6 +117,9 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
   // res.json(result)
 });
 
+
+
+
 const UpdateRencanakerja = expressAsyncHandler(async (req, res) => {
   let { Id, title, tanggal, keterangan, status, userId } = req.body;
 
@@ -148,11 +151,19 @@ const DeleteRencanakerja = expressAsyncHandler(async (req, res) => {
   res.json(renja);
 });
 
+//Gambar tidak muncul karena tidak di include kann BEGEEEE
 const GetRenjaOn = expressAsyncHandler(async (req, res) => {
   let renja = await prisma.rencanakerja.findMany({
     where: {
       statusRenjaId: 1,
+
           
+    }, include: {
+      gallery: {
+        select: {
+           gambar: true
+        }
+      }
     }
   })
   res.json(renja)
@@ -185,6 +196,31 @@ const GetRenjaCancel = expressAsyncHandler(async (req, res) => {
   res.json(renja)
 })
 
+const UpdateStatusRenja = expressAsyncHandler(async (req, res) => {
+  let body = req.body
+  console.log(body)
+
+  let status = await prisma.statusRenja.findFirst({
+    where: {
+      name: body.name
+    }
+
+  })
+  console.log(status)
+
+  let statusrenja = await prisma.rencanakerja.update({
+    data: {
+      statusRenjaId: status.id
+    },
+    where: {
+      Id: body.rencanakerjaId
+      
+    }
+  })
+  res.status(200).json("berhasil")
+})
+
+
 module.exports = {
   GetRencanakerja,
   CreateRencanakerja,
@@ -193,5 +229,6 @@ module.exports = {
   GetRenjaOn,
   GetRenjaAcc,
   GetRenjaDone,
-  GetRenjaCancel
+  GetRenjaCancel,
+  UpdateStatusRenja
 };
