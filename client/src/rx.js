@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux';
 
 class Rx{
-
+    
     init() {
         let Dis = () => useDispatch()
         let Sel = () => useSelector((state) => state[this.name]);
@@ -18,6 +18,7 @@ class Rx{
 
     set val(value) {
         setTimeout(() => {
+            if(this.dis == null) this.dis = useDispatch
             this.dis(this.state.actions.set(value));
         },1);
     }

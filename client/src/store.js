@@ -6,13 +6,16 @@ const orang = new Rx("orang", []);
 const user = new Rx("user", {});
 const muncul = new Rx("muncul", Boolean);
 const kesana = new Rx("kesana", Number);
-
+//ADMIN
 const listRenja = new Rx("listRenja", []);
 const listStatus = new Rx("listStatus", []);
 const renjaOn = new Rx("renjaOn", []);
 const renjaAcc = new Rx("renjaAcc", []);
-const renjaDone = new Rx("renjaDone", [])
-const renjaCancel = new Rx("renjaCancel", [])
+const renjaDone = new Rx("renjaDone", []);
+const renjaCancel = new Rx("renjaCancel", []);
+
+//CLIENT
+const dataProfile = new Rx("dataProfile", []);
 
 const store = configureStore({
   reducer: {
@@ -23,11 +26,30 @@ const store = configureStore({
     muncul: muncul.reducer,
     kesana: kesana.reducer,
 
+    //Server
     renjaOn: renjaOn.reducer,
     renjaAcc: renjaAcc.reducer,
     renjaDone: renjaDone.reducer,
-    renjaCancel: renjaCancel.reducer
+    renjaCancel: renjaCancel.reducer,
+
+    //Client
+    dataProfile: dataProfile.reducer,
   },
 });
 
-export { orang, store, user, listRenja, listStatus, muncul, kesana, renjaOn, renjaAcc, renjaDone, renjaCancel};
+export {
+  orang,
+  store,
+  user,
+  //Server
+  listRenja,
+  listStatus,
+  muncul,
+  kesana,
+  renjaOn,
+  renjaAcc,
+  renjaDone,
+  renjaCancel,
+  //Client
+  dataProfile
+};

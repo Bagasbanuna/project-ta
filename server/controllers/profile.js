@@ -9,7 +9,21 @@ const prisma = new PrismaClient();
 
 
 const GetProfile = expressAsyncHandler(async (req, res) =>{
-    let prof = await prisma.profile.findMany();
+
+    let prof = await prisma.profile.findMany({
+        select: {
+            nim: true,
+            namaDepan: true,
+            
+            User: {
+                select: {
+                    username: true,
+                    email: true
+                }
+            }
+
+        }
+    }); 
     res.json(prof)
 })
 

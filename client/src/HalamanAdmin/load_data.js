@@ -1,13 +1,11 @@
 import axios from "axios";
 import { listRenja, listStatus, renjaAcc, renjaCancel, renjaDone, renjaOn } from "../store";
 
-function ambilDataRenja() {
-  axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
-    //orang.val = JSON.stringify(a)
-    listRenja.val = a.data;
-  });
+async function ambilDataRenja() {
+  const data = await axios.get("http://localhost:5000/api/v1/rencanakerja")
+  listRenja.val = data.data
 }
-
+ 
 function statusRenja() {
   axios.get("http://localhost:5000/api/v1/status-renja").then((s) =>{
     listStatus.val = s.data
@@ -18,22 +16,20 @@ function statusRenja() {
 function statusRenjaOn() {
   axios.get("http://localhost:5000/api/v1/rencanakerja/statuson").then((son) =>{
     renjaOn.val = son.data
-    console.log(son.data)
+    console.log(son.data,"ini ON Progres")
   })
 }
 
-function statusRenjaAcc (){
-  axios.get("http://localhost:5000/api/v1/rencanakerja/statusacc").then((sacc) =>{
-    renjaAcc.val = sacc.data
-    console.log(sacc.data, "ini status renja acc")
-  })
+async function statusRenjaAcc (){
+  let data = await axios.get("http://localhost:5000/api/v1/rencanakerja/statusacc")
+    renjaAcc.val = data.data
+
 }
 
-function statusRenjaDone (){
-  axios.get("http://localhost:5000/api/v1/rencanakerja/statusdone").then((sdone) =>{
-    renjaDone.val = sdone.data
-    console.log(sdone.data)
-  })
+async function statusRenjaDone (){
+  let data = await axios.get("http://localhost:5000/api/v1/rencanakerja/statusdone");
+  renjaDone.val = data.data
+  console.log(data.data)
 }
 
 function statusRenjaCancel (){
@@ -43,6 +39,13 @@ function statusRenjaCancel (){
   })
 }
 
-export {ambilDataRenja ,  statusRenja, statusRenjaOn, statusRenjaAcc, statusRenjaDone, statusRenjaCancel }
+function loadKabeh(){
+  listRenja.init();
+  listStatus.init();
+  renjaOn.init();
+  renjaAcc.init();
+}
+
+export {ambilDataRenja ,  statusRenja, statusRenjaOn, statusRenjaAcc, statusRenjaDone, statusRenjaCancel, loadKabeh }
 
 

@@ -5,14 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { FileUpload } from "./upload_file";
 import { ImageUpload } from "./upload_image";
-import { listRenja, listStatus, orang, renjaAcc, renjaOn, store } from "../store";
-import { ambilDataRenja, statusRenja, statusRenjaAcc, statusRenjaOn } from "./load_data";
+import {
+  listRenja,
+  listStatus,
+  orang,
+  renjaAcc,
+  renjaOn,
+  store,
+} from "../store";
+import {
+  ambilDataRenja,
+  loadKabeh,
+  statusRenja,
+  statusRenjaAcc,
+  statusRenjaOn,
+} from "./load_data";
 
 //Ambil data dari load data
-ambilDataRenja();
-statusRenja();
-statusRenjaOn();
-statusRenjaAcc()
+
 var User = [
   {
     Id: 3,
@@ -47,16 +57,6 @@ var User = [
   },
 ];
 
-var IniFile = [
-  {
-    Id: 1,
-    file: "84ff8bf6-1ec9-4bce-8880-4d3e8135292fRevisi dosen 2.docx",
-    createAt: "2022-06-17T16:38:21.478Z",
-    rencanakerjaId: 28,
-    jenisFileId: null,
-  },
-];
-
 function antiNull(data) {
   try {
     return data.gallery[0].gambar;
@@ -68,7 +68,7 @@ function antiNull(data) {
 let berapa = 0;
 
 function Wadah({ component }) {
-  orang.init();
+  // orang.init();
 
   return (
     <div style={{ marginLeft: 300 }}>
@@ -92,23 +92,10 @@ class RenjaByUser extends Component {
       let iniUser = JSON.parse(adaUser).Id;
 
       super(props);
-      // axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
-      //   console.log(a.data);
-      //   this.updateRenja(a.data);
-      // });
-
-      // axios.get("http://localhost:5000/api/v1/status-renja").then((e) => {
-      //   console.log(e.data);
-      //   this.updateStatus(e.data);
-      // });
 
       this.AmbilData();
       /**@type {User} */
       let Renja = [];
-
-      // /**@type {Status} */
-      // let StatusRenja = [];
-
       this.state = {
         Renja: Renja,
       };
@@ -119,38 +106,29 @@ class RenjaByUser extends Component {
     }
   }
 
-  // Data nya gk perlu ambil disini karena sudah di deklarasikan dengan function lain di file load_data
-  AmbilData() {
-    // axios.get("http://localhost:5000/api/v1/rencanakerja").then((a) => {
-    //   //orang.val = JSON.stringify(a)
-    //   listRenja.val = a.data
-    // });
-  }
-
-  updateRenja(a) {
-    this.setState({
-      Renja: a,
-    });
-  }
-
-  berapa = 0;
-
   render() {
     return <IsiRenja state={this.state} />;
   }
 }
 
+
+
+setTimeout(() => {
+  ambilDataRenja();
+  statusRenja();
+  statusRenjaOn();
+  statusRenjaAcc();
+}, 3000);
+
 function IsiRenja() {
   let nav = useNavigate();
-  listRenja.init();
-  listStatus.init();
-  renjaOn.init();
-  renjaAcc.init()
+  loadKabeh()
 
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Rencana Kerja </h1>
+       
         {/* {JSON.stringify(listStatus.val)} */}
         {/* {JSON.stringify(renjaAcc.val)} */}
 
@@ -185,43 +163,34 @@ function IsiRenja() {
             {renjaOn.val.map((a) => {
               // console.log(a)
               return (
-               
                 <tr key={a.Id}>
                   <td>{a.title}</td>
                   <td>{new Date(a.tanggal).toDateString()}</td>
                   <td>{a.keterangan}</td>
                   <td>
-
                     <img
                       style={{ height: 100 }}
                       src={"http://localhost:5000/images/" + antiNull(a)}
-                      
                     />
                   </td>
                   <td>
                     <select
-                    onChange={(e) =>{
-                      axios.post("http://localhost:5000/api/v1/rencanakerja/updatestatus", {name: e.target.value , rencanakerjaId: a.Id})
-                      .then(statusRenjaOn)
-                      
-                      console.log(e.target.value)
-                        
-                       
-                    }}
+                      onChange={(e) => {
+                        axios
+                          .post(
+                            "http://localhost:5000/api/v1/rencanakerja/updatestatus",
+                            { name: e.target.value, rencanakerjaId: a.Id }
+                          )
+                          .then(statusRenjaOn);
+
+                        console.log(e.target.value);
+                      }}
                     >
                       {listStatus.val.map((s) => {
                         return <option key={s.id}>{s.name}</option>;
                       })}
                     </select>
-
-                    {/* <select className="form-select" name="" id="">
-                      <option value={"On Progres"}>On Progres</option>
-                      <option value={"Accpet"}>Accpet</option>
-                      <option value={"Done"}>Done</option>
-                      <option value={"Cancel"}>Cancel</option> 
-                    </select>                     */}
                   </td>
-
                   <td>
                     <div className="row">
                       <div className="col-sm">

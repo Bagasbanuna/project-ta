@@ -85,7 +85,7 @@ model rencanakerja {
   gallery       gallery[]
   StatusRenja   StatusRenja? @relation(fields: [statusRenjaId], references: [id])
   statusRenjaId Int?
-}
+} 
 
 // harus ada data jenis file
 model files {

@@ -64,10 +64,11 @@ GET http://localhost:5000/api/v1/userInclude HTTP/1.1
 ### get profile
 GET http://localhost:5000/api/v1/profile HTTP/1.1
 
+
 ### create profile
 POST http://localhost:5000/api/v1/profile HTTP/1.1
 Content-Type: application/json
-
+ 
 {
     "nim": "1002",
     "namaDepan": "abil",

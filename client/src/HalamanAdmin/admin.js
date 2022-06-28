@@ -7,9 +7,10 @@ import { MainAdmin } from "./main_admin";
 import { Sidebar } from "./sidebar";
 
 
-ambilDataRenja()
+
 
 function HalamanAdmin() {
+  ambilDataRenja();
   let nav = useNavigate();
   listRenja.init()
  

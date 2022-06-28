@@ -1,17 +1,20 @@
-import { kesana, listRenja, muncul } from "../store";
+import { addListener } from "@reduxjs/toolkit";
+import { kesana, listRenja, muncul, renjaAcc } from "../store";
+import { statusRenjaAcc } from "./load_data";
 
-function IniDimana() {
-  muncul.init();
-  kesana.init();
-  return (
-    <div
-      className="p6 bg-primary position-absolute"
-      style={{ right: kesana.val ?? 100 }}
-    >
-      <h1>Menu</h1>
-    </div>
-  );
-}
+
+// function IniDimana() {
+//   muncul.init();
+//   kesana.init();
+//   return (
+//     <div
+//       className="p6 bg-primary position-absolute"
+//       style={{ right: kesana.val ?? 100 }}
+//     >
+//       <h1>Menu</h1>
+//     </div>
+//   );
+// }
 
 function antiNull(data) {
   try {
@@ -22,9 +25,11 @@ function antiNull(data) {
 }
 
 function Pengumuman() {
+  statusRenjaAcc()
+  renjaAcc.init()
   listRenja.init();
-  muncul.init();
-  kesana.init();
+  // muncul.init();
+  // kesana.init();
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -50,20 +55,21 @@ function Pengumuman() {
         </thead>
         <tbody>
           {listRenja.val.map((a) => {
-            return (
-              <tr key={a.Id}>
-                <td>{a.title}</td>
-                <td>{new Date(a.tanggal).toDateString()}</td>
-                <td>{a.keterangan}</td>
-                <td>
-                  <img
-                    style={{ height: 50 }}
-                    src={"http://localhost:5000/images/" + antiNull(a)}
-                  />
-                </td>
-                <td>...</td>
-              </tr>
-            );
+            console.log(a)
+            // return (
+            //   <tr key={a.Id}>
+            //     <td>{a.title}</td>
+            //     <td>{new Date(a.tanggal).toDateString()}</td>
+            //     <td>{a.keterangan}</td>
+            //     <td>
+            //       <img
+            //         style={{ height: 50 }}
+            //         src={"http://localhost:5000/images/" + antiNull(a)}
+            //       />
+            //     </td>
+            //     <td>...</td>
+            //   </tr>
+            // );
           })}
         </tbody>
       </table>
