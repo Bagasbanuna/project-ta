@@ -7,8 +7,6 @@ import { MainAdmin } from "./main_admin";
 import { Sidebar } from "./sidebar";
 
 
-
-
 function HalamanAdmin() {
   ambilDataRenja();
   let nav = useNavigate();
@@ -81,4 +79,6 @@ function HalamanAdmin() {
     </div>
   );
 }
+
+
 export { HalamanAdmin };

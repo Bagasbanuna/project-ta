@@ -55,11 +55,11 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
     },
   });
 
-  let status = await prisma.statusRenja.create({
-    data: {
-      name: body.name
-    }
-  })
+  // let status = await prisma.statusRenja.create({
+  //   data: {
+  //     name: body.name
+  //   }
+  // })
 
   let renja = await prisma.rencanakerja.create({
     data: {
@@ -76,11 +76,11 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
           Id: gambar.Id,
         },
       },
-      StatusRenja: {
-        connect: {
-          id: status.id
-        }
-      }
+      // StatusRenja: {
+      //   connect: {
+      //     id: status.id
+      //   }
+      // }
 
     },
   });
@@ -90,7 +90,7 @@ const CreateRencanakerja = expressAsyncHandler(async (req, res) => {
     data: {
       renja: renja,
       gambar: gambar,
-      status: status
+      // status: status
     },
   };
 

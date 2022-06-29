@@ -15,11 +15,12 @@
 // // to log results (for example: reportWebVitals(console.log))
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // // reportWebVitals();
+/////////////////////
 
-
-import ReactDOM from 'react-dom/client'
+import { RencanaKerja } from './HalamanAdmin/rencana_kerja';
 
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,7 +32,6 @@ import { HalamanAdmin } from './HalamanAdmin/admin';
 import { Pengurus } from './HalamanAdmin/pengurus';
 import { UpdatePengurus } from './HalamanAdmin/update_pengurus';
 import { Anggota } from './HalamanAdmin/anggota';
-import { RencanaKerja } from './HalamanAdmin/rencana_kerja';
 import { Pengumuman } from './HalamanAdmin/pengumuman';
 import { Berita } from './HalamanAdmin/berita';
 import { UpdateAnggota } from './HalamanAdmin/update_anggota';
@@ -39,7 +39,8 @@ import { Arsip } from './HalamanAdmin/arsip';
 import { TambahRenja } from './HalamanAdmin/tambah_renja';
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')).render
+(
     <Provider store={store}>
         <BrowserRouter>
             <Routes>
@@ -67,25 +68,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='halaman-arsip' element={<Arsip/>}/>               
 
 
-                </Route>
-                {/* <Route path='/aboutPage' element={<HalamanAbout />} /> */}
-                {/* <Route path='/loginPage' element={<LoginPage />} /> */}
-                {/* {MyRouter.login().route}
-                {MyRouter.regis().route} */}
-                {/* <Route path='/halamanprofile' element={< HalamanProfile/>}/> */}
-                
-                {/* Profile */}
-                {/* <Route path='/tampilan-profile' element={<TampilanProfile/>}/>
-                <Route path='/update-profile' element={<UpdateProfile/>}/> */}
-                
-              
-
-                {/* Frontend */}
-                {/* <Route path='/home' element={<TampilanHome/>}/> */}
-
-
-
-                
+                </Route>                
             </Routes>
         </BrowserRouter>
     </Provider>

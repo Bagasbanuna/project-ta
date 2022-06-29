@@ -84,7 +84,7 @@ model rencanakerja {
   files         files[]
   gallery       gallery[]
   StatusRenja   StatusRenja? @relation(fields: [statusRenjaId], references: [id])
-  statusRenjaId Int?
+  statusRenjaId Int? @default(1)
 } 
 
 // harus ada data jenis file

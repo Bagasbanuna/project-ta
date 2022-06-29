@@ -3,18 +3,6 @@ import { kesana, listRenja, muncul, renjaAcc } from "../store";
 import { statusRenjaAcc } from "./load_data";
 
 
-// function IniDimana() {
-//   muncul.init();
-//   kesana.init();
-//   return (
-//     <div
-//       className="p6 bg-primary position-absolute"
-//       style={{ right: kesana.val ?? 100 }}
-//     >
-//       <h1>Menu</h1>
-//     </div>
-//   );
-// }
 
 function antiNull(data) {
   try {
@@ -25,11 +13,12 @@ function antiNull(data) {
 }
 
 function Pengumuman() {
-  statusRenjaAcc()
+
   renjaAcc.init()
-  listRenja.init();
-  // muncul.init();
-  // kesana.init();
+  if(renjaAcc.val.length < 1){
+    statusRenjaAcc()
+  }
+  
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -54,7 +43,7 @@ function Pengumuman() {
           </tr>
         </thead>
         <tbody>
-          {listRenja.val.map((a) => {
+          {renjaAcc.val.map((a) => {
             console.log(a)
             // return (
             //   <tr key={a.Id}>
