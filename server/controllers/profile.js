@@ -14,6 +14,11 @@ const GetProfile = expressAsyncHandler(async (req, res) =>{
         select: {
             nim: true,
             namaDepan: true,
+            FotoProfile: {
+                select: {
+                    id:true
+                }
+            },
             
             User: {
                 select: {
@@ -21,6 +26,7 @@ const GetProfile = expressAsyncHandler(async (req, res) =>{
                     email: true
                 }
             }
+              
 
         }
     }); 
@@ -28,35 +34,71 @@ const GetProfile = expressAsyncHandler(async (req, res) =>{
 })
 
 const CreateProfile = expressAsyncHandler(async (req, res) =>{
-    
-    let {nim, namaDepan, namaBelakang, alamat, tempatLahir, tanggalLahir,
-    jenisKelamin, nomorHp, tahunAngkatan, fotoKtp, fotoProfile , userId} = req.body
+    let body = req.body
 
-    let prof = await prisma.profile.create({
+    let FotoKtp = await prisma.fotoKtp.create({
         data: {
-            nim: Number(nim),
-            namaDepan: namaDepan,
-            namaBelakang: namaBelakang,
-            alamat: alamat,
-            tempatLahir: tempatLahir,
-            tanggalLahir: tanggalLahir,
-            jenisKelamin: jenisKelamin,
-            nomorHp: nomorHp,
-            tahunAngkatan: Number(tahunAngkatan),
-            fotoKtp: fotoKtp,
-            fotoProfile: fotoProfile,
-            userId: userId
+            id: body.id
         }
     })
 
-    let success = prof !=null
-    let result = {
-        success: success,
-        data: prof
-    }
+    let FotoProfile = await prisma.fotoProfile.create({
+        data: {
+            id: body.id
+        }
+    }) 
 
-    res.json(result)
-})
+    let prof = await prisma.profile.create({
+        data: {
+
+            nim: Number(body.nim),
+            namaDepan: body.namaDepan,
+
+            userId: Number(body.userId),
+            FotoProfile: {
+                connect: {
+                    id: body.id
+                }
+            },
+            // FotoKtp: {
+            //     connect: {
+            //         id: body.id
+            //     }
+            // }
+
+            
+
+
+            // namaBelakang: namaBelakang,
+            // alamat: alamat,
+            // tempatLahir: tempatLahir,
+            // tanggalLahir: tanggalLahir,
+            // jenisKelamin: jenisKelamin,
+            // nomorHp: nomorHp,
+            // tahunAngkatan: Number(tahunAngkatan),
+        }
+        
+        })
+    
+        // let success = prof !=null
+        // let result = {
+        //     success: success,
+        //     data: prof
+        // }
+    
+    
+        let success = {
+    
+            data: {
+                prof: prof,
+                // FotoKtp: FotoKtp,
+                // FotoProfile: FotoProfile
+            }
+        }
+    
+    res.status(200).json(success)   
+}
+)
 
 const UpdateProfile = expressAsyncHandler (async (req, res) => {
     let {Id, nim, namaDepan, namaBelakang, alamat, tempatLahir, tanggalLahir,

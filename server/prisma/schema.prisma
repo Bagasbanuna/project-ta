@@ -31,8 +31,8 @@ model user {
 }
 
 model profile {
-  Id            Int      @id @default(autoincrement())
-  nim           Int      @unique
+  Id            Int     @id @default(autoincrement())
+  nim           Int     @unique
   namaDepan     String?
   namaBelakang  String?
   alamat        String?
@@ -41,13 +41,29 @@ model profile {
   jenisKelamin  String?
   nomorHp       String?
   tahunAngkatan Int?
-  fotoKtp       String?
-  fotoProfile   String?
-  User          user?    @relation(fields: [userId], references: [Id], onDelete: NoAction)
-  userId        Int?     @unique
-  jabatan       jabatan?
-  divisi        divisi?
-  jurusan       jurusan?
+  User    user?    @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId  Int?     @unique
+  jabatan jabatan?
+  divisi  divisi?
+  jurusan jurusan?
+  FotoKtp     FotoKtp[]
+  FotoProfile FotoProfile[]
+}
+
+model FotoKtp {
+  id        Int      @id @default(autoincrement())
+  Profile   profile? @relation(fields: [profileId], references: [Id])
+  Gallery   gallery? @relation(fields: [galleryId], references: [Id])
+  profileId Int?
+  galleryId Int?
+}
+
+model FotoProfile {
+  id        Int      @id @default(autoincrement())
+  Profile   profile? @relation(fields: [profileId], references: [Id])
+  Gallery   gallery? @relation(fields: [galleryId], references: [Id])
+  profileId Int?
+  galleryId Int?
 }
 
 model jabatan {
@@ -84,8 +100,8 @@ model rencanakerja {
   files         files[]
   gallery       gallery[]
   StatusRenja   StatusRenja? @relation(fields: [statusRenjaId], references: [id])
-  statusRenjaId Int? @default(1)
-} 
+  statusRenjaId Int?         @default(1)
+}
 
 // harus ada data jenis file
 model files {
@@ -112,6 +128,9 @@ model gallery {
   gambar         String
   Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
   rencanakerjaId Int?
+
+  FotoKtp     FotoKtp[]
+  FotoProfile FotoProfile[]
 }
 
 model kritiksaran {
@@ -123,8 +142,8 @@ model kritiksaran {
 }
 
 model StatusRenja {
-  id   Int    @id @default(autoincrement())
-  name String
+  id           Int            @id @default(autoincrement())
+  name         String
   // Setelah deklarasi relasi foreignkey lalu Alt+Shift+F
   rencanakerja rencanakerja[]
 }
