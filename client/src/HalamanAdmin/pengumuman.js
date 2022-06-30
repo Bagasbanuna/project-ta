@@ -1,8 +1,8 @@
 import { addListener } from "@reduxjs/toolkit";
-import { kesana, listRenja, muncul, renjaAcc } from "../store";
-import { statusRenjaAcc } from "./load_data";
-
-
+import axios from "axios";
+import { Tombol } from "../lib/button";
+import { kesana, listRenja, listStatus, muncul, renjaAcc } from "../store";
+import { statusRenja, statusRenjaAcc } from "./load_data";
 
 function antiNull(data) {
   try {
@@ -13,12 +13,17 @@ function antiNull(data) {
 }
 
 function Pengumuman() {
+  renjaAcc.init();
+  listStatus.init();
 
-  renjaAcc.init()
-  if(renjaAcc.val.length < 1){
-    statusRenjaAcc()
+  if (renjaAcc.val.length < 1) {
+    statusRenjaAcc();
   }
-  
+
+  if (listStatus.val.length < 1) {
+    statusRenja();
+  }
+
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -33,32 +38,71 @@ function Pengumuman() {
           kesana.val -= 10
       }}> muncul </button> */}
       <table className="table table-striped">
-        <thead>
+        <thead className="text-center">
           <tr>
             <th>Judul</th>
-            <th>Tanggal Kegiatan</th>
+            <th>Tanggal</th>
             <th>Keterangan</th>
-            <th>Foto</th>
+            <th>Gambar</th>
+            <th>Status</th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           {renjaAcc.val.map((a) => {
-            console.log(a)
-            // return (
-            //   <tr key={a.Id}>
-            //     <td>{a.title}</td>
-            //     <td>{new Date(a.tanggal).toDateString()}</td>
-            //     <td>{a.keterangan}</td>
-            //     <td>
-            //       <img
-            //         style={{ height: 50 }}
-            //         src={"http://localhost:5000/images/" + antiNull(a)}
-            //       />
-            //     </td>
-            //     <td>...</td>
-            //   </tr>
-            // );
+            // console.log(a)
+            return (
+              <tr key={Math.random()}>
+                <td>{a.title}</td>
+                <td>{new Date(a.tanggal).toDateString()}</td>
+                <td>{a.keterangan}</td>
+                <td>
+                  <img
+                    style={{ height: 100 }}
+                    src={"http://localhost:5000/images/" + antiNull(a)}
+                  />
+                </td>
+                <td>
+                  <select
+                    onChange={(e) => {
+                      axios.post(
+                        "http://localhost:5000/api/v1/rencanakerja/updatestatus",
+                        {name: e.target.value, rencanakerjaId: a.Id }
+                      )
+                      .then(statusRenjaAcc)
+                      console.log(e.target.value)
+                    }}
+                  >
+                    {listStatus.val.map((a) => {
+                      return <option key={Math.random()}>{a.name}</option>;
+                    })}
+                  </select>
+                </td>
+                <td>
+                <div className="row">
+                      <div className="col-sm">
+                        <Tombol title={"Edit"} warna={"success"} />
+                      </div>
+                      <div className="col">
+                        <Tombol
+                          title={"Hapus"}
+                          warna={"danger"}
+                          onClick={() => {
+                            axios
+                              .delete(
+                                "http://localhost:5000/api/v1/rencanakerja/delete" +
+                                  a.rencanakerja.Id
+                              )
+                              .then((a) => {
+                                console.log(a);
+                              });
+                          }}
+                        />
+                      </div>
+                    </div>
+                </td>
+              </tr>
+            );
           })}
         </tbody>
       </table>

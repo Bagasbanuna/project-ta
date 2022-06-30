@@ -156,7 +156,7 @@ function IsiRenja() {
           <thead className="text-center">
             <tr>
               <th>Judul</th>
-              <th>Tanggal Kegiatan</th>
+              <th>Tanggal</th>
               <th>Keterangan</th>
               <th>Gambar</th>
               <th>Status</th>

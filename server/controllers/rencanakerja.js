@@ -188,6 +188,13 @@ const GetRenjaDone = expressAsyncHandler(async (req, res) =>{
   let renja = await prisma.rencanakerja.findMany({
     where: {
       statusRenjaId: 3
+    },
+    include: {
+      gallery: {
+        select: {
+          gambar: true
+        }
+      }
     }
   })
   res.json(renja)
@@ -217,7 +224,7 @@ const UpdateStatusRenja = expressAsyncHandler(async (req, res) => {
   let statusrenja = await prisma.rencanakerja.update({
     data: {
       statusRenjaId: status.id
-    },
+    }, 
     where: {
       Id: body.rencanakerjaId
       

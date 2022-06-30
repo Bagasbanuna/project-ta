@@ -1,4 +1,4 @@
-import { Pengumuman } from "./pengumuman"
+import { Pengumuman, PengumumanBaru } from "./pengumuman"
 import { StrukturOrganisasi } from "./stuktur_organisasi"
 
 function PengertianImmuki() {
@@ -60,7 +60,8 @@ function Main() {
     <div>
       <main className="container">
         <PengertianImmuki />
-        <Pengumuman datanya={listPe} />
+        {/* <Pengumuman datanya={listPe} /> */}
+        <PengumumanBaru/>
         <StrukturOrganisasi />
       </main>
 
