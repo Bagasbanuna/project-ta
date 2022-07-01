@@ -26,7 +26,7 @@ api.post('/user/update', UpdateUser)
 api.post('/user/delete', DeleteUser)
 
 // profile
-api.get('/profile', GetProfile)
+api.get('/profile/:Id', GetProfile)
 api.post('/profile', CreateProfile)
 api.post('/profile/update', UpdateProfile)
 api.delete('/profile/delete/:Id', DeleteProfile)

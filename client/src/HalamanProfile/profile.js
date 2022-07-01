@@ -5,6 +5,10 @@ import { Tombol } from "../lib/button";
 import { Formulir, MyForm } from "../lib/form";
 import { MyRouter } from "../my_router";
 
+const body = {
+  Id: ""
+}
+
 function TampilanProfile() {
   let hasil = {};
   MyRouter.Init(useNavigate);
@@ -14,7 +18,20 @@ function TampilanProfile() {
     setTimeout(() => {
       nav("/login");
     }, 500);
-  delete console.log(window.localStorage.getItem("user"));
+  // delete console.log(window.localStorage.getItem("user"));
+
+  //Let Body untuk ambil data user dari localStorage
+  let body = JSON.parse(window.localStorage.getItem("user"))
+  console.log(body)
+
+  //axios get ngirim data ke server dan + id nya
+  //dari axios di kirim ke  route
+  //route harus sesuai dengan apa yang dikirim , jika ada id maka di tambah Id
+  //Then(e) adalah pengembalian dari server yang di dapat dari / res.json()
+  axios.get("http://localhost:5000/api/v1/profile/"+ body.Id).then((e) =>{
+    console.log(JSON.stringify(e.data, null, 4), "apa ini sudah ada")
+  })
+  
 
   return user == null ? (
     <div>data kosong</div>
@@ -26,14 +43,21 @@ function TampilanProfile() {
           className="btn btn-danger"
           onClick={() => {
             nav("/");
-            console.log("logout");
+            // console.log("logout");
             localStorage.removeItem("user");
-            console.log(localStorage.getItem("user"));
+            // console.log(localStorage.getItem("user"));
           }}
         >
           LOGOUT
         </button>
 
+        {/* <div>
+          <input onChange={(e) =>{
+            body["Id"] = e.target.value
+          }}></input>
+        </div> */}
+
+        
         {/* <MyForm
           
           ketikaBerubah={(body) => {
