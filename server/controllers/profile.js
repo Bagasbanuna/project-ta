@@ -34,6 +34,24 @@ console.log(Id)
     where: {
       Id: Number(Id)
     },
+    include: {
+      profile: {
+        include: {
+          jurusan: true,
+          FotoProfile: { 
+            select: {
+              id: true
+            }
+          },
+          FotoKtp: {
+            select: {
+              id: true
+            }
+          }
+        
+        }
+      }
+    }
   });
   
 

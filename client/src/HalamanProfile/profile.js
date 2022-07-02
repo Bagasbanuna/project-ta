@@ -1,15 +1,43 @@
 import axios from "axios";
 import { data } from "jquery";
 import { useNavigate } from "react-router-dom";
+import { ProfileData } from "../frontend/load_data_frontend";
 import { Tombol } from "../lib/button";
-import { Formulir, MyForm } from "../lib/form";
+import { Formulir, MyForm, NewForm } from "../lib/form";
 import { MyRouter } from "../my_router";
+import { dataProfile } from "../store";
 
-const body = {
-  Id: ""
+// async function AmbilData() {
+
+//   let body = JSON.parse(window.localStorage.getItem("user"));
+//   console.log(body);
+//   //Let Body untuk ambil data user dari localStorage
+//   //axios get ngirim data ke server dan + id nya
+//   //dari axios di kirim ke  route
+//   //route harus sesuai dengan apa yang dikirim , jika ada id maka di tambah Id
+//   //Then(e) adalah pengembalian dari server yang di dapat dari / res.json()
+
+//   await axios
+//     .get("http://localhost:5000/api/v1/profile/" + body.Id)
+//     .then((e) => {
+//       console.log(JSON.stringify(e.data, null, 4), "Data Berhasil di ambil");
+//     });
+// }
+
+function antiNull(data) {
+  try {
+    return data.profile.nim;
+  } catch (error) {
+    return "Data kosong";
+  }
 }
 
 function TampilanProfile() {
+  dataProfile.init();
+  if (dataProfile.val.length < 1) {
+    ProfileData();
+  }
+
   let hasil = {};
   MyRouter.Init(useNavigate);
   let nav = useNavigate();
@@ -20,18 +48,20 @@ function TampilanProfile() {
     }, 500);
   // delete console.log(window.localStorage.getItem("user"));
 
-  //Let Body untuk ambil data user dari localStorage
-  let body = JSON.parse(window.localStorage.getItem("user"))
-  console.log(body)
+  //**INI CATATAN */
+  // Let Body untuk ambil data user dari localStorage
+  // axios get ngirim data ke server dan + id nya
+  // dari axios di kirim ke  route
+  // route harus sesuai dengan apa yang dikirim , jika ada id maka di tambah Id
+  // Then(e) adalah pengembalian dari server yang di dapat dari / res.json()
 
-  //axios get ngirim data ke server dan + id nya
-  //dari axios di kirim ke  route
-  //route harus sesuai dengan apa yang dikirim , jika ada id maka di tambah Id
-  //Then(e) adalah pengembalian dari server yang di dapat dari / res.json()
-  axios.get("http://localhost:5000/api/v1/profile/"+ body.Id).then((e) =>{
-    console.log(JSON.stringify(e.data, null, 4), "apa ini sudah ada")
-  })
-  
+  // let body = JSON.parse(window.localStorage.getItem("user"));
+  // console.log(body);
+  // axios
+  //   .get("http://localhost:5000/api/v1/profile/" + body.Id)
+  //   .then((e) => {
+  //     console.log(JSON.stringify(e.data, null, 4), "Data Berhasil di ambil");
+  //   });
 
   return user == null ? (
     <div>data kosong</div>
@@ -51,33 +81,23 @@ function TampilanProfile() {
           LOGOUT
         </button>
 
-        {/* <div>
-          <input onChange={(e) =>{
-            body["Id"] = e.target.value
-          }}></input>
-        </div> */}
+        {/* Jika bentuknya Map atau body cukup di panggil aja */}
+        {/* {JSON.stringify(dataProfile.val.profile + antiNull(dataProfile.val))} */}
 
         
-        {/* <MyForm
-          
-          ketikaBerubah={(body) => {
-            hasil = body;
-          }}
-          values ={user}
-        /> */}
-        <MyForm
-          items={[
-            "NIM",
-            "Nama Anggota",
-            "Jurusan",
-            "Tempat Lahir",
-            "Tanggal Lahir",
-            "Alamat",
-            "Email",
-            "No HP",
-            "Tahun Ajaran",
-          ]}
-        /> 
+          <Formulir title={"Nama Depan"} placeholder={antiNull(dataProfile.val)}/>
+          <Formulir title={"Nim"} placeholder={antiNull(dataProfile)}/>
+          <label>NIM</label>
+          <input
+            className="form-control"
+            placeholder={antiNull(dataProfile.val)}
+          ></input>
+        
+
+        {/* <div>
+          <NewForm title={["nama","nim"]}/>
+        </div> */}
+       
 
         <div className="row m-auto">
           <div

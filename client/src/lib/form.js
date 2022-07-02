@@ -1,7 +1,8 @@
 function Formulir({ title, placeholder, onChange }) {
+
   return (
-    <div>
-      <div className="col-sm-12 col-md-6 col-lg-4 ">
+    
+      <div className="form-control">
         <label>{title}</label>
         <input
           onChange={onChange}
@@ -9,8 +10,31 @@ function Formulir({ title, placeholder, onChange }) {
           placeholder={placeholder}
         />
       </div>
-    </div>
+    
   );
+}
+
+function NewForm({title, placeholder, values}){
+  let dataini = Object.keys(values)
+
+  return(
+    <div>
+      {dataini.map((item) =>{
+        return(
+          <div key={Math.random()}>
+            <label>{item}</label>
+            <input
+            className="form-control"
+            place holder={values[item]}
+            ></input>
+
+          </div>
+        )
+      }
+      
+      )}
+    </div>
+  )
 }
 
 function AdaValuenya({ values, ketikaBerubah }) {
@@ -77,4 +101,4 @@ function MyForm({ items, values, ketikaBerubah }) {
   }
 }
 
-export { Formulir, MyForm };
+export { Formulir, MyForm, NewForm };
