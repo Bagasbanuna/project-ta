@@ -17,4 +17,9 @@ async function ProfileData() {
   // console.log(dataProfile)
 }
 
+async function UpdateProfile() {
+  const data = await axios
+  .post 
+}
+
 export { ProfileData };

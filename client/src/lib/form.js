@@ -1,13 +1,16 @@
-function Formulir({ title, placeholder, onChange }) {
+function Formulir({ title, placeholder, onChange , required}) {
 
   return (
     
-      <div className="form-control">
+      <div className="form-group">
         <label>{title}</label>
         <input
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e)
+          }}
           className="form-control"
           placeholder={placeholder}
+          
         />
       </div>
     

@@ -160,7 +160,7 @@ function IsiRenja() {
               <th>Keterangan</th>
               <th>Gambar</th>
               <th>Status</th>
-              <th>Aksi</th>
+              <th>Aksi</th> 
             </tr>
           </thead>
           <tbody>

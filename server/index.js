@@ -15,7 +15,7 @@ app.get('/images/:name', (req, res) => {
     if (fs.existsSync(path.join(__dirname, `./uploads/${req.params.name}` ))) {
         res.sendFile(path.join(__dirname, `./uploads/${req.params.name}` ));
     } else {
-        res.type('image/png').sendFile('./public/error_pdf.jpg', { root: __dirname });
+        res.type('image/png').sendFile('./public/no_image.png', { root: __dirname });
     }
 });
 

@@ -6,57 +6,54 @@ const res = require("express/lib/response");
 const prisma = new PrismaClient();
 
 const GetProfile = expressAsyncHandler(async (req, res) => {
+  //   let prof = await prisma.user.findMany({
+  //     select: {
+  //       Id: true,
+  //       username: true,
+  //       email: true,
+  //       profile: {
+  //         select: {
+  //           Id: true,
+  //           nim: true,
+  //           namaDepan: true,
+  //           FotoProfile: {
+  //             select: {
+  //               id: true,
+  //             },
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
 
-//   let prof = await prisma.user.findMany({
-//     select: {
-//       Id: true,
-//       username: true,
-//       email: true,
-//       profile: {
-//         select: {
-//           Id: true,
-//           nim: true,
-//           namaDepan: true,
-//           FotoProfile: {
-//             select: {
-//               id: true,
-//             },
-//           },
-//         },
-//       },
-//     },
-//   });
-
-let Id = req.params.Id
-console.log(Id)
+  let Id = req.params.Id;
+  console.log(Id);
 
   let prf = await prisma.user.findUnique({
     where: {
-      Id: Number(Id)
+      Id: Number(Id),
+
     },
     include: {
       profile: {
         include: {
           jurusan: true,
-          FotoProfile: { 
+          FotoProfile: {
             select: {
-              id: true
-            }
+              id: true,
+            },
           },
           FotoKtp: {
             select: {
-              id: true
-            }
-          }
-        
-        }
-      }
-    }
+              id: true,
+            },
+          },
+        },
+      },
+    },
   });
-  
 
   res.json(prf);
-
 
   // res.json("hehe")
 });
@@ -112,52 +109,57 @@ const CreateProfile = expressAsyncHandler(async (req, res) => {
   let success = {
     data: {
       prof: prof,
-      // FotoKtp: FotoKtp,
-      // FotoProfile: FotoProfile
     },
   };
 
-  res.status(200).json(success);
+  res.status(200).json(success, "Data Berhasil Update");
 });
 
 const UpdateProfile = expressAsyncHandler(async (req, res) => {
-  let {
-    Id,
-    nim,
-    namaDepan,
-    namaBelakang,
-    alamat,
-    tempatLahir,
-    tanggalLahir,
-    jenisKelamin,
-    nomorHp,
-    tahunAngkatan,
-    fotoKtp,
-    fotoProfile,
-    userId,
-  } = req.body;
+  let body = req.body;
+  // console.log(body.userId)
+  // console.log(body.dataUser);
+  // console.log(body.dataProfile);
 
-  let prof = await prisma.profile.update({
+  let usr = await prisma.user.update({
     data: {
-      nim: Number(nim),
-      namaDepan: namaDepan,
-      namaBelakang: namaBelakang,
-      alamat: alamat,
-      tempatLahir: tempatLahir,
-      tanggalLahir: tanggalLahir,
-      jenisKelamin: jenisKelamin,
-      nomorHp: nomorHp,
-      tahunAngkatan: Number(tahunAngkatan),
-      fotoKtp: fotoKtp,
-      fotoProfile: fotoProfile,
-      userId: userId,
+      username: body.dataUser.username,
+      email: body.dataUser.email,
     },
     where: {
-      Id: Number(Id),
+      Id: body.userId,
     },
   });
 
-  res.json(prof);
+  let prof = await prisma.profile.update({
+    data: {
+      nim: Number(body.dataProfile.nim),
+     
+      namaDepan: body.dataProfile.namaDepan,
+      namaBelakang: body.dataProfile.namaBelakang,
+      alamat: body.dataProfile.alamat,
+      nomorHp: body.dataProfile.nomorHp,
+      jenisKelamin: body.dataProfile.jenisKelamin,
+      tempatLahir: body.dataProfile.tempatLahir,
+      tanggalLahir: body.dataProfile.tanggalLahir,
+      tahunAngkatan: Number(body.dataProfile.tahunAngkatan),
+      // jurusan: body.dataProfile.jurusan,
+    },
+    where: {
+      userId: body.userId,
+    },
+  });
+
+  let success = {
+    data: {
+      data: "Data Berhasil Update",
+      usr: usr,
+      prof: prof,
+    },
+  };
+
+  res.status(200).json(success.data.data);
+  // res.status(200).json(body)
 });
 
 const DeleteProfile = expressAsyncHandler(async (req, res) => {
