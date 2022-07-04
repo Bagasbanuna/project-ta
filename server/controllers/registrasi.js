@@ -11,9 +11,18 @@ const CreateRegistrasi = expressAsyncHandler (async (req, res)=> {
             email: body.email,
             password: body.password,
             username: body.username,
+            profile: {
+                create: {
+                    namaDepan: body.user
+                }
+            }
+        },
+        include: {
+            profile: true
         }
     })
     
+    console.log(reg)
     res.json(reg)
 })
 

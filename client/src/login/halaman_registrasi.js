@@ -73,7 +73,7 @@ function HalamanRegis() {
             console.log(body)
 
             axios.post("http://localhost:5000/api/v1/registrasi", body).then((e) => {
-              console.log(e.data)
+              console.log("Data Barusan ni")
             })
             
           }}

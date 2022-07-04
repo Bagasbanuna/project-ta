@@ -1,4 +1,5 @@
 import axios from "axios";
+import { data } from "jquery";
 import { useNavigate } from "react-router-dom";
 import { ProfileData } from "../frontend/load_data_frontend";
 import { Tombol } from "../lib/button";
@@ -7,22 +8,13 @@ import { dataProfile } from "../store";
 
 const body = {
   dataUser: {
-    username: "",
-    email: " ",
+   
   },
   dataProfile: {
-    nim: "",
-    namaDepan: "",
-    namaBelakang: "",
-    alamat: "",
-    nomorHp: "",
-    jenisKelamin: "",
-    tempatLahir: "",
-    tanggalLahir: "",
-    tahunAngkatan: "",
-    jurusan: "",
+    
   },
   userId: "",
+  profileId: ""
 };
 
 // const body2 = [body];
@@ -56,7 +48,12 @@ function UpdateProfile() {
                 // Id nya adalah isi dari user
                 // Coba di console satu- satu
                 body.userId = user.Id;
+                body.profileId = dataProfile.val.profile.Id
+
+  
+
                 console.log(body);
+                console.log(dataProfile)
                 axios
                   .post("http://localhost:5000/api/v1/profile/update", body)
                   .then((a) => {
@@ -125,8 +122,10 @@ function UpdateProfile() {
             placeholder={antiLahir(dataProfile.val)}
             onChange={(s) =>{
               body.dataProfile.tempatLahir = s.target.value
+            
             }}
           />
+
           <Formulir
             title={"Tanggal Lahir"}
             placeholder={antiTanggal(dataProfile.val)}

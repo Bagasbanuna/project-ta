@@ -1,4 +1,4 @@
-function Formulir({ title, placeholder, onChange , required}) {
+function Formulir({ title, placeholder, onChange , type}) {
 
   return (
     
@@ -10,7 +10,7 @@ function Formulir({ title, placeholder, onChange , required}) {
           }}
           className="form-control"
           placeholder={placeholder}
-          
+          type={type}         
         />
       </div>
     

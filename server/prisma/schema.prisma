@@ -32,7 +32,7 @@ model user {
 
 model profile {
   Id            Int     @id @default(autoincrement())
-  nim           Int     @unique
+  nim           Int?     @unique
   namaDepan     String?
   namaBelakang  String?
   alamat        String?

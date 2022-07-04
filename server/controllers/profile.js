@@ -53,6 +53,7 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
     },
   });
 
+  // console.log(prf)
   res.json(prf);
 
   // res.json("hehe")
@@ -123,8 +124,8 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
 
   let usr = await prisma.user.update({
     data: {
-      username: body.dataUser.username,
-      email: body.dataUser.email,
+      username: body.dataUser.username?? undefined,
+      email: body.dataUser.email?? undefined,
     },
     where: {
       Id: body.userId,
@@ -133,20 +134,20 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
 
   let prof = await prisma.profile.update({
     data: {
-      nim: Number(body.dataProfile.nim),
-     
-      namaDepan: body.dataProfile.namaDepan,
-      namaBelakang: body.dataProfile.namaBelakang,
-      alamat: body.dataProfile.alamat,
-      nomorHp: body.dataProfile.nomorHp,
-      jenisKelamin: body.dataProfile.jenisKelamin,
-      tempatLahir: body.dataProfile.tempatLahir,
-      tanggalLahir: body.dataProfile.tanggalLahir,
-      tahunAngkatan: Number(body.dataProfile.tahunAngkatan),
+      // ?? undefined adalah Untuk cek data null
+      nim: Number(body.dataProfile.nim)?? undefined,     
+      namaDepan: body.dataProfile.namaDepan?? undefined,
+      namaBelakang: body.dataProfile.namaBelakang?? undefined,
+      alamat: body.dataProfile.alamat?? undefined,
+      nomorHp: body.dataProfile.nomorHp?? undefined,
+      jenisKelamin: body.dataProfile.jenisKelamin?? undefined,
+      tempatLahir: body.dataProfile.tempatLahir?? undefined,
+      tanggalLahir: body.dataProfile.tanggalLahir?? undefined,
+      // tahunAngkatan: undefined,
       // jurusan: body.dataProfile.jurusan,
     },
     where: {
-      userId: body.userId,
+      Id: body.profileId
     },
   });
 
