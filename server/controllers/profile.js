@@ -132,7 +132,19 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   //   },
   // });
 
-  // let nim = Number(body.upProfile.nim)?? null
+  let fotoProf = await prisma.gallery.create({
+    data: {
+      gambar: body.upProfile.gambar
+    }
+  })
+
+  let fotoProfUp = await prisma.fotoProfile.create({
+    data: {
+      galleryId: fotoProf.Id,
+      
+
+    }
+  })
 
   // function antiNim(data){
   //   try {
@@ -164,7 +176,9 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   //     tempatLahir: body.upProfile.tempatLahir?? undefined,
   //     tanggalLahir: body.upProfile.tanggalLahir?? undefined,
   //     tahunAngkatan:  antiTahun(body.upProfile.tahunAngkatan),
-  //     jurusan: body.upProfile.jurusan?? undefined
+  //     jurusan: body.upProfile.jurusan?? undefined,
+      
+
   //   },
   //   where: {
   //     Id: body.profileId
@@ -180,6 +194,7 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   // };
 
   // res.status(200).json(success.data.data);
+  console.log(fotoProf)
   res.json(body)
 });
 

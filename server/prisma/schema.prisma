@@ -31,8 +31,8 @@ model user {
 }
 
 model profile {
-  Id            Int     @id @default(autoincrement())
-  nim           Int?     @unique
+  Id            Int          @id @default(autoincrement())
+  nim           Int?         @unique
   namaDepan     String?
   namaBelakang  String?
   alamat        String?
@@ -41,29 +41,31 @@ model profile {
   jenisKelamin  String?
   nomorHp       String?
   tahunAngkatan Int?
-  User    user?    @relation(fields: [userId], references: [Id], onDelete: NoAction)
-  userId  Int?     @unique
-  jabatan jabatan?
-  divisi  divisi?
-  jurusan jurusan?
-  FotoKtp     FotoKtp[]
-  FotoProfile FotoProfile[]
+  User          user?        @relation(fields: [userId], references: [Id], onDelete: NoAction)
+  userId        Int?         @unique
+  jabatan       jabatan?
+  divisi        divisi?
+  jurusan       jurusan?
+  FotoKtp       FotoKtp?     @relation(fields: [fotoKtpId], references: [id])
+  FotoProfile   FotoProfile? @relation(fields: [fotoProfileId], references: [id])
+  fotoKtpId     Int?
+  fotoProfileId Int?
 }
 
 model FotoKtp {
-  id        Int      @id @default(autoincrement())
-  Profile   profile? @relation(fields: [profileId], references: [Id])
-  Gallery   gallery? @relation(fields: [galleryId], references: [Id])
+  id Int @id @default(autoincrement())
+  Gallery   gallery?  @relation(fields: [galleryId], references: [Id])
   profileId Int?
   galleryId Int?
+  profile   profile[]
 }
 
 model FotoProfile {
-  id        Int      @id @default(autoincrement())
-  Profile   profile? @relation(fields: [profileId], references: [Id])
-  Gallery   gallery? @relation(fields: [galleryId], references: [Id])
+  id Int @id @default(autoincrement())
+  Gallery   gallery?  @relation(fields: [galleryId], references: [Id])
   profileId Int?
   galleryId Int?
+  profile   profile[]
 }
 
 model jabatan {

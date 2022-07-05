@@ -208,8 +208,8 @@ function UpdateProfile() {
           
           <ImageUpload
           hasilgambar = {(a) =>{
-            body.upProfile = a
-            console.log(a)
+            body.upProfile.gambar = a
+            console.log(body)
           }}
           />
 
