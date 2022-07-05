@@ -118,49 +118,69 @@ const CreateProfile = expressAsyncHandler(async (req, res) => {
 
 const UpdateProfile = expressAsyncHandler(async (req, res) => {
   let body = req.body;
-  // console.log(body.userId)
+  console.log(body)
   // console.log(body.dataUser);
   // console.log(body.dataProfile);
 
-  let usr = await prisma.user.update({
-    data: {
-      username: body.dataUser.username?? undefined,
-      email: body.dataUser.email?? undefined,
-    },
-    where: {
-      Id: body.userId,
-    },
-  });
+  // let usr = await prisma.user.update({
+  //   data: {
+  //     username: body.dataUser.username?? undefined,
+  //     email: body.dataUser.email?? undefined,
+  //   },
+  //   where: {
+  //     Id: body.userId,
+  //   },
+  // });
 
-  let prof = await prisma.profile.update({
-    data: {
-      // ?? undefined adalah Untuk cek data null
-      nim: Number(body.dataProfile.nim)?? undefined,     
-      namaDepan: body.dataProfile.namaDepan?? undefined,
-      namaBelakang: body.dataProfile.namaBelakang?? undefined,
-      alamat: body.dataProfile.alamat?? undefined,
-      nomorHp: body.dataProfile.nomorHp?? undefined,
-      jenisKelamin: body.dataProfile.jenisKelamin?? undefined,
-      tempatLahir: body.dataProfile.tempatLahir?? undefined,
-      tanggalLahir: body.dataProfile.tanggalLahir?? undefined,
-      // tahunAngkatan: undefined,
-      // jurusan: body.dataProfile.jurusan,
-    },
-    where: {
-      Id: body.profileId
-    },
-  });
+  // let nim = Number(body.upProfile.nim)?? null
 
-  let success = {
-    data: {
-      data: "Data Berhasil Update",
-      usr: usr,
-      prof: prof,
-    },
-  };
+  // function antiNim(data){
+  //   try {
+  //     return Number(data.profile.nim)
+  //   } catch (error) {
+  //     return undefined
+  //   }
+  // }
 
-  res.status(200).json(success.data.data);
-  // res.status(200).json(body)
+  // function antiTahun(data){
+  //   try {
+  //     return Number(data.profile.tahunAngkatan)
+  //   } catch (error) {
+  //     return undefined
+  //   }
+  // }
+
+  // let prof = await prisma.profile.update({
+  //   data: {
+  //     // ?? undefined adalah Untuk cek data null
+
+
+  //     nim: antiNim(body.upProfile.nim),     
+  //     namaDepan: body.upProfile.namaDepan?? undefined,
+  //     namaBelakang: body.upProfile.namaBelakang?? undefined,
+  //     alamat: body.upProfile.alamat?? undefined,
+  //     nomorHp: body.upProfile.nomorHp?? undefined,
+  //     jenisKelamin: body.upProfile.jenisKelamin?? undefined,
+  //     tempatLahir: body.upProfile.tempatLahir?? undefined,
+  //     tanggalLahir: body.upProfile.tanggalLahir?? undefined,
+  //     tahunAngkatan:  antiTahun(body.upProfile.tahunAngkatan),
+  //     jurusan: body.upProfile.jurusan?? undefined
+  //   },
+  //   where: {
+  //     Id: body.profileId
+  //   },
+  // });
+
+  // let success = {
+  //   data: {
+  //     data: "Data Berhasil Update",
+  //     usr: usr,
+  //     prof: prof,
+  //   },
+  // };
+
+  // res.status(200).json(success.data.data);
+  res.json(body)
 });
 
 const DeleteProfile = expressAsyncHandler(async (req, res) => {

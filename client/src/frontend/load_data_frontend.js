@@ -1,5 +1,5 @@
 import axios from "axios";
-import { dataProfile } from "../store";
+import { dataProfile, listJurusan } from "../store";
 
 async function ProfileData() {
   let body = JSON.parse(window.localStorage.getItem("user"));
@@ -17,9 +17,17 @@ async function ProfileData() {
   // console.log(dataProfile)
 }
 
-async function UpdateProfile() {
+async function ListJurusan() {
   const data = await axios
-  .post 
+  .get("http://localhost:5000/api/v1/jurusan")
+  .then((e) =>{
+    console.log(JSON.stringify(e, null, 3),"Summon List Jurusan")
+    listJurusan.val = e.data
+  })
 }
 
-export { ProfileData };
+export { 
+  ProfileData,
+  ListJurusan,
+
+};

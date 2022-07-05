@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Component } from "react";
-
+ 
 class ImageUpload extends Component {
   constructor(prop) {
     super(prop);

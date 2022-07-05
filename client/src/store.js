@@ -16,6 +16,7 @@ const renjaCancel = new Rx("renjaCancel", []);
 
 //CLIENT
 const dataProfile = new Rx("dataProfile", []);
+const listJurusan = new Rx("listJurusan", [])
 
 const store = configureStore({
   reducer: {
@@ -34,6 +35,7 @@ const store = configureStore({
 
     //Client
     dataProfile: dataProfile.reducer,
+    listJurusan: listJurusan.reducer,
   },
 });
 
@@ -51,5 +53,7 @@ export {
   renjaDone,
   renjaCancel,
   //Client
-  dataProfile
+  dataProfile,
+  listJurusan,
+
 };

@@ -1,20 +1,17 @@
 import axios from "axios";
 import { data } from "jquery";
 import { useNavigate } from "react-router-dom";
-import { ProfileData } from "../frontend/load_data_frontend";
+import { ListJurusan, ProfileData } from "../frontend/load_data_frontend";
+import { ImageUpload } from "../HalamanAdmin/upload_image";
 import { Tombol } from "../lib/button";
 import { Formulir, MyForm } from "../lib/form";
-import { dataProfile } from "../store";
+import { dataProfile, listJurusan } from "../store";
 
 const body = {
-  dataUser: {
-   
-  },
-  dataProfile: {
-    
-  },
+  dataUser: {},
+  upProfile: {},
   userId: "",
-  profileId: ""
+  profileId: "",
 };
 
 // const body2 = [body];
@@ -22,12 +19,18 @@ const body = {
 function UpdateProfile() {
   let user = JSON.parse(window.localStorage.getItem("user"));
   //   console.log(user)
-  let nav = useNavigate()
+  let nav = useNavigate();
 
   dataProfile.init();
+  listJurusan.init();
+
   if (dataProfile.val.length < 1) {
     ProfileData();
   }
+  if (listJurusan.val.length < 1){
+    ListJurusan()
+  }
+
 
   return user == null ? (
     <div>Data Belum Ada </div>
@@ -48,22 +51,20 @@ function UpdateProfile() {
                 // Id nya adalah isi dari user
                 // Coba di console satu- satu
                 body.userId = user.Id;
-                body.profileId = dataProfile.val.profile.Id
-
-  
+                body.profileId = dataProfile.val.profile.Id;
 
                 console.log(body);
-                console.log(dataProfile)
+                console.log(dataProfile);
                 axios
                   .post("http://localhost:5000/api/v1/profile/update", body)
                   .then((a) => {
-                    if(a.status == 200){
-                      ProfileData()
-                      nav("/profile")
-                    }else{
-                      console.log(a.data)
+                    if (a.status == 200) {
+                      ProfileData();
+                      nav("/profile");
+                    } else {
+                      console.log(a.data);
                     }
-                  })
+                  });
               }}
             />
           </div>
@@ -82,8 +83,8 @@ function UpdateProfile() {
             onChange={(s) => {
               body.dataUser.username = s.target.value;
               //   console.log(s.target.value);
-            
             }}
+            type={"username"}
           />
           <Formulir
             title={"Email"}
@@ -92,6 +93,7 @@ function UpdateProfile() {
               body.dataUser.email = s.target.value;
               //   console.log(s.target.value);
             }}
+            type={"email"}
           />
 
           {/* Profile */}
@@ -99,86 +101,118 @@ function UpdateProfile() {
             title={"NIM"}
             placeholder={antiNim(dataProfile.val)}
             onChange={(s) => {
-              body.dataProfile.nim = s.target.value;
+              body.upProfile.nim = s.target.value;
               //   console.log(s.target.value);
             }}
           />
           <Formulir
             title={"Nama Depan"}
             placeholder={antiNamaD(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.namaDepan = s.target.value
+            onChange={(s) => {
+              body.upProfile.namaDepan = s.target.value;
             }}
           />
           <Formulir
             title={"Nama Belakang"}
             placeholder={antiNamaB(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.namaBelakang = s.target.value
+            onChange={(s) => {
+              body.upProfile.namaBelakang = s.target.value;
             }}
           />
           <Formulir
             title={"Tempat Lahir"}
             placeholder={antiLahir(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.tempatLahir = s.target.value
-            
+            onChange={(s) => {
+              body.upProfile.tempatLahir = s.target.value;
             }}
           />
 
           <Formulir
             title={"Tanggal Lahir"}
             placeholder={antiTanggal(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.tanggalLahir = s.target.value
+            onChange={(s) => {
+              body.upProfile.tanggalLahir = s.target.value;
             }}
-            
+            type={"Date"}
           />
           <Formulir
             title={"Nomor HandPhone"}
             placeholder={antiNomor(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.nomorHp = s.target.value
+            onChange={(s) => {
+              body.upProfile.nomorHp = s.target.value;
             }}
           />
           <Formulir
             title={"Alamat"}
             placeholder={antiAlamat(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.alamat = s.target.value
+            onChange={(s) => {
+              body.upProfile.alamat = s.target.value;
             }}
           />
-          <Formulir
-            title={"Jenis Kelamin"}
-            placeholder={antiJenisK(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.jenisKelamin = s.target.value
-            }}
-          />
+
+          <div>
+            <label>Jenis Kelamin</label>
+            <select
+              className="form-select"
+              onChange={(s) => {
+                body.upProfile.jenisKelamin = s.target.value;
+                console.log(s.target.value);
+              }}
+            >
+              <option defaultValue={"Pilih satu"}> </option>
+              <option value={"Laki-laki"}>Laki - laki</option>
+              <option value={"Wanita"}>Wanita</option>
+            </select>
+          </div>
+          {/* <Formulir
+              title={"Jenis Kelamin"}
+              placeholder={antiJenisK(dataProfile.val)}
+              onChange={(s) => {
+                body.dataProfile.jenisKelamin = s.target.value;
+              }}
+            /> */}
+
           <Formulir
             title={"Tahun Angkatan"}
             placeholder={antiAngkatan(dataProfile.val)}
-            onChange={(s) =>{
-              body.dataProfile.tahunAngkatan = s.target.value
+            onChange={(s) => {
+              body.upProfile.tahunAngkatan = s.target.value;
             }}
           />
-          <Formulir
+
+          <div>
+            <select
+            className="form-select"
+            onChange={(s) =>{
+              // body.dataProfile.jurusan = s.target.value
+              // console.log(s.target.value)
+            }}
+            >
+              <option defaultValue={""}>Pilih Jurusan</option>
+              
+              {listJurusan.val.map((a) =>{
+                return <option key={Math.random()}>{a.namaJurusan}</option>
+              })}
+            </select>
+          </div>
+
+
+          {/* <Formulir
             title={"Jurusan"}
             placeholder={antiJurusan(dataProfile.val)}
             // onChange={(s) =>{
             //   body.dataProfile.jurusan = s.target.value
             // }}
-          />
+          /> */}
           <hr />
-          <div className="d-flex justify-content-center">
-            {/* <p>Foto Profile</p> */}
+          
+          <ImageUpload
+          hasilgambar = {(a) =>{
+            body.upProfile = a
+            console.log(a)
+          }}
+          />
 
-            <img
-              className="rounded-circle"
-              style={{ width: 100, height: 100 }}
-              src={"http://localhost:5000/images/" + antiFotoP(dataProfile.val)}
-            />
-          </div>
           <div>
             <label className="p-2">Foto KTP : </label>
             <img

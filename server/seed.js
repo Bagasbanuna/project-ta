@@ -24,101 +24,101 @@ const MyStatus = [
 const listJabatan = [
     {
         "Id": 1,
-        "namaJabatan": "ketua"
+        "namaJabatan": "Ketua"
     },
     {
         "Id": 2,
-        "namaJabatan": "wakil ketua"
+        "namaJabatan": "Kakil Ketua"
     },
     {
         "Id": 3,
-        "namaJabatan": "sekretaris 1"
+        "namaJabatan": "Sekretaris 1"
     },
     {
         "Id": 4,
-        "namaJabatan": "sekretaris 2"
+        "namaJabatan": "Sekretaris 2"
     },
     {
         "Id": 5,
-        "namaJabatan": "bendahara"
+        "namaJabatan": "Bendahara"
     },
     {
         "Id": 6,
-        "namaJabatan": "kordinator humas"
+        "namaJabatan": "Koordinator Humas"
     },
     {
         "Id": 7,
-        "namaJabatan": "kordinator perlengkapan"
+        "namaJabatan": "Koordinator Perlengkapan"
     },
     {
         "Id": 8,
-        "namaJabatan": "kordinator kaderisasi"
+        "namaJabatan": "Koordinator Kaderisasi"
     },
     {
         "Id": 9,
-        "namaJabatan": "kordinator kerohanian"
+        "namaJabatan": "Koordinator Kerohanian"
     },
     {
         "Id": 10,
-        "namaJabatan": "kordinator kemuslimahan"
+        "namaJabatan": "Koordinator Kemuslimahan"
     },
     {
         "Id": 11,
-        "namaJabatan": "kordinator media"
+        "namaJabatan": "Koordinator Media"
     },
     {
         "Id": 12,
-        "namaJabatan": "pembina"
+        "namaJabatan": "Pembina"
     },
 ]
 
 const listJurusan = [
     {
         "Id": 1,
-        "namaJurusan": "ti-mdi"
+        "namaJurusan": "TI-MDI"
     },
     {
         "Id": 2,
-        "namaJurusan": "ti-sgm"
+        "namaJurusan": "TI-DGM"
     },
     {
         "Id": 3,
-        "namaJurusan": "ti-kab"
+        "namaJurusan": "TI-KAB"
     },
     {
         "Id": 4,
-        "namaJurusan": "sk"
+        "namaJurusan": "Sistem Komputer (SK)"
     }
 ]
 
 const listDivisi = [
     {
         "Id": 1,
-        "namaDivisi": "inti",
+        "namaDivisi": "Inti",
     },
     {
         "Id": 2,
-        "namaDivisi": "keroanian",
+        "namaDivisi": "Keroanian",
     },
     {
         "Id": 3,
-        "namaDivisi": "kemuslimahan",
+        "namaDivisi": "Kemuslimahan",
     },
     {
         "Id": 4,
-        "namaDivisi": "media",
+        "namaDivisi": "Media",
     },
     {
         "Id": 5,
-        "namaDivisi": "perlengkapan",
+        "namaDivisi": "Perlengkapan",
     },
     {
         "Id": 6,
-        "namaDivisi": "humas",
+        "namaDivisi": "Humas",
     },
     {
         "Id": 7,
-        "namaDivisi": "kaderisasi",
+        "namaDivisi": "Kaderisasi",
     }
 
 ]
@@ -296,7 +296,7 @@ async function Coba() {
     // console.log("seed rencana kerja berhasil")
 
 
-    let listUser = Array.from(Array(20).keys())
+    let listUser = Array.from(Array(5).keys())
     let index = 1;
     for (let user of listUser) {
         await prisma.user.upsert({
@@ -320,7 +320,7 @@ async function Coba() {
 
     console.log("seed user berhasil")
 
-    let listProfile = Array.from(Array(20).keys())
+    let listProfile = Array.from(Array(5).keys())
     let indexProfile = 1;
     for (let profile of listProfile) {
         await prisma.profile.upsert({
