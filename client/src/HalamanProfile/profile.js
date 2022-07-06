@@ -74,9 +74,9 @@ function TampilanProfile() {
             <label>Nama Belakang :</label>
             <div>{antiNamaB(dataProfile.val)}</div>
           </div> */}
-          <div className="d-flex justify-content-center">
-            {/* <p>Foto Profile</p> */}
 
+          <div className="d-flex justify-content-center">
+            
             <img
               className="rounded-circle"
               style={{ width: 100, height: 100 }}
@@ -130,6 +130,7 @@ function TampilanProfile() {
               style={{ width: "100%", height: 150 }}
               src={"http://localhost:5000/images/" + antiKtp(dataProfile.val)}
             />
+            {/* {dataProfile.val.} */}
           </div>
           <hr />
         </div>
@@ -229,7 +230,8 @@ function antiJurusan(data) {
 }
 function antiKtp(data) {
   try {
-    return data.profile.FotoKtp[0];
+    console.log(data.profile.FotoKtp.gambarKtp)
+    return data.profile.FotoKtp.gambarKtp;
   } catch (error) {
     return "kosong.jpg";
   }

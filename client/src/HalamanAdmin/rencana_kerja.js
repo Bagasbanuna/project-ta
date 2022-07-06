@@ -59,6 +59,7 @@ var User = [
 
 function antiNull(data) {
   try {
+    console.log(data.gallery)
     return data.gallery[0].gambar;
   } catch (error) {
     return "kosong.jpg";

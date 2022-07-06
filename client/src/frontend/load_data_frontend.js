@@ -8,8 +8,8 @@ async function ProfileData() {
   const data = await axios
     .get("http://localhost:5000/api/v1/profile/" + body.Id)
     .then((e) => {
-      // console.log(JSON.stringify(e.data, null, 3), "Data Berhasil di ambil")
-      console.log("Berhasil ambil data profil")
+      console.log(JSON.stringify(e.data, null, 3), "Data Berhasil di ambil")
+      // console.log("Berhasil ambil data profil")
       
 
     dataProfile.val = e.data

@@ -5,6 +5,7 @@ import { statusRenja, statusRenjaDone } from "./load_data";
 
 function antiNull(data) {
   try {
+    
     return data.gallery[0].gambar;
   } catch (error) {
     return "kosong.jpg";

@@ -14,6 +14,10 @@ const body = {
   profileId: "",
 };
 
+const bodyKtp = {
+  gambarKtp: "",
+};
+
 // const body2 = [body];
 
 function UpdateProfile() {
@@ -27,10 +31,9 @@ function UpdateProfile() {
   if (dataProfile.val.length < 1) {
     ProfileData();
   }
-  if (listJurusan.val.length < 1){
-    ListJurusan()
+  if (listJurusan.val.length < 1) {
+    ListJurusan();
   }
-
 
   return user == null ? (
     <div>Data Belum Ada </div>
@@ -65,6 +68,8 @@ function UpdateProfile() {
                       console.log("Berhasil");
                     }
                   });
+
+                
               }}
             />
           </div>
@@ -101,7 +106,7 @@ function UpdateProfile() {
             title={"NIM"}
             placeholder={antiNim(dataProfile.val)}
             onChange={(s) => {
-              body.upProfile.nim  = s.target.value;
+              body.upProfile.nim = s.target.value;
               //   console.log(s.target.value);
             }}
           />
@@ -164,13 +169,6 @@ function UpdateProfile() {
               <option value={"Wanita"}>Wanita</option>
             </select>
           </div>
-          {/* <Formulir
-              title={"Jenis Kelamin"}
-              placeholder={antiJenisK(dataProfile.val)}
-              onChange={(s) => {
-                body.dataProfile.jenisKelamin = s.target.value;
-              }}
-            /> */}
 
           <Formulir
             title={"Tahun Angkatan"}
@@ -180,38 +178,31 @@ function UpdateProfile() {
             }}
           />
 
+          <hr />
           <div>
             <select
-            className="form-select"
-            onChange={(s) =>{
-              // body.dataProfile.jurusan = s.target.value
-              // console.log(s.target.value)
-            }}
+              className="form-select"
+              onChange={(s) => {
+                // body.dataProfile.jurusan = s.target.value
+                // console.log(s.target.value)
+              }}
             >
               <option defaultValue={""}>Pilih Jurusan</option>
-              
-              {listJurusan.val.map((a) =>{
-                return <option key={Math.random()}>{a.namaJurusan}</option>
+
+              {listJurusan.val.map((a) => {
+                return <option key={Math.random()}>{a.namaJurusan}</option>;
               })}
             </select>
           </div>
 
-
-          {/* <Formulir
-            title={"Jurusan"}
-            placeholder={antiJurusan(dataProfile.val)}
-            // onChange={(s) =>{
-            //   body.dataProfile.jurusan = s.target.value
-            // }}
-          /> */}
           <hr />
-          
-          {/* <ImageUpload
-          hasilgambar = {(a) =>{
-            body.upProfile.gambar = a
-            console.log(body)
-          }}
-          /> */}
+
+          <ImageUpload
+            hasilgambar={(a) => {
+              body.upProfile.gambarKtp = a
+              console.log(body);
+            }}
+          />
 
           <div>
             <label className="p-2">Foto KTP : </label>

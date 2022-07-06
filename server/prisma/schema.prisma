@@ -46,13 +46,11 @@ model profile {
   jabatan       jabatan?
   divisi        divisi?
   jurusan       jurusan?
-  // FotoKtp       FotoKtp?     @relation(fields: [fotoKtpId], references: [id])
-  // FotoProfile   FotoProfile? @relation(fields: [fotoProfileId], references: [id])
-  // fotoKtpId     Int?
-  // fotoProfileId Int?
-  FotoKtp       FotoKtp?
-  FotoProfile   FotoProfile?
+  FotoKtp       FotoKtp[]
+  FotoProfile   FotoProfile[]
 }
+// Kalaao deklarasi Id nya ada di table yg dituju contoh fotoKTP berarti harus ada profileId atau ada Profile yg dibuat
+// dulu baru bisa membuat foto ktp
 
 model FotoKtp {
   id        Int      @id @default(autoincrement())

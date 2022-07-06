@@ -8,7 +8,7 @@ class ImageUpload extends Component {
       namaImage: "",
     };
   }
-
+ 
   render() {
     return (
       <div>
