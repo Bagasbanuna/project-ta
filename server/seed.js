@@ -142,8 +142,8 @@ let profile = {
     "jenisKelamin": "",
     "nomorHp": "",
     "tahunAngkatan": "",
-    "fotoKtp": "",
-    "fotoProfile": "",
+    "FotoKtp": "",
+    "FotoProfile": "",
     "userId": "",
 }
 
@@ -338,8 +338,8 @@ async function Coba() {
                 jenisKelamin: "jenisKelamin" + indexProfile,
                 nomorHp: "nomorHp" + indexProfile,
                 tahunAngkatan: Number(2015 + indexProfile),
-                fotoKtp: "fotoKtp" + indexProfile,
-                fotoProfile: "fotoProfile" + indexProfile,
+                FotoKtp: "FotoKtp" + indexProfile,
+                FotoProfile: "FotoProfile" + indexProfile,
                 userId: indexProfile
             },
             update: {
@@ -352,8 +352,8 @@ async function Coba() {
                 jenisKelamin: "jenisKelamin" + indexProfile,
                 nomorHp: "nomorHp" + indexProfile,
                 tahunAngkatan: Number(2015 + indexProfile),
-                fotoKtp: "fotoKtp" + indexProfile,
-                fotoProfile: "fotoProfile" + indexProfile,
+                FotoKtp: "FotoKtp" + indexProfile,
+                FotoProfile: "FotoProfile" + indexProfile,
                 userId: indexProfile
             }
         })

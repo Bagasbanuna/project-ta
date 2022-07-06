@@ -62,17 +62,6 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
 const CreateProfile = expressAsyncHandler(async (req, res) => {
   let body = req.body;
 
-  let FotoKtp = await prisma.fotoKtp.create({
-    data: {
-      id: body.id,
-    },
-  });
-
-  let FotoProfile = await prisma.fotoProfile.create({
-    data: {
-      id: body.id,
-    },
-  });
 
   let prof = await prisma.profile.create({
     data: {
@@ -113,7 +102,7 @@ const CreateProfile = expressAsyncHandler(async (req, res) => {
     },
   };
 
-  res.status(200).json(success, "Data Berhasil Update");
+  res.status(200).json(success, "Data Berhasil Di creat");
 });
 
 const UpdateProfile = expressAsyncHandler(async (req, res) => {
@@ -122,80 +111,67 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   // console.log(body.dataUser);
   // console.log(body.dataProfile);
 
-  // let usr = await prisma.user.update({
-  //   data: {
-  //     username: body.dataUser.username?? undefined,
-  //     email: body.dataUser.email?? undefined,
-  //   },
-  //   where: {
-  //     Id: body.userId,
-  //   },
-  // });
-
-  let fotoProf = await prisma.gallery.create({
+  let usr = await prisma.user.update({
     data: {
-      gambar: body.upProfile.gambar
-    }
-  })
+      username: body.dataUser.username?? undefined,
+      email: body.dataUser.email?? undefined,
+    },
+    where: {
+      Id: body.userId,
+    },
+  });
 
-  let fotoProfUp = await prisma.fotoProfile.create({
+
+
+  function antiNim(data){
+    try {
+      return Number(data.profile.nim)
+    } catch (error) {
+      return undefined
+    }
+  }
+
+  function antiTahun(data){
+    try {
+      return Number(data.profile.tahunAngkatan)
+    } catch (error) {
+      return undefined
+    }
+  }
+
+  let prof = await prisma.profile.update({
     data: {
-      galleryId: fotoProf.Id,
-      
+      // ?? undefined adalah Untuk cek data null
 
-    }
-  })
+      nim: antiNim(body.upProfile.nim),
+      tahunAngkatan: antiTahun(body.upProfile.tahunAngkatan),
 
-  // function antiNim(data){
-  //   try {
-  //     return Number(data.profile.nim)
-  //   } catch (error) {
-  //     return undefined
-  //   }
-  // }
+      // nim: antiNim(body.upProfile.nim), 
+      namaDepan: body.upProfile.namaDepan?? undefined,
+      namaBelakang: body.upProfile.namaBelakang?? undefined,
+      alamat: body.upProfile.alamat?? undefined,
+      nomorHp: body.upProfile.nomorHp?? undefined,
+      jenisKelamin: body.upProfile.jenisKelamin?? undefined,
+      tempatLahir: body.upProfile.tempatLahir?? undefined,
+      tanggalLahir: body.upProfile.tanggalLahir?? undefined,
+      jurusan: body.upProfile.jurusan?? undefined,
+    },
+    where: {
+      Id: body.profileId
+    },
+  });
 
-  // function antiTahun(data){
-  //   try {
-  //     return Number(data.profile.tahunAngkatan)
-  //   } catch (error) {
-  //     return undefined
-  //   }
-  // }
-
-  // let prof = await prisma.profile.update({
-  //   data: {
-  //     // ?? undefined adalah Untuk cek data null
-
-
-  //     nim: antiNim(body.upProfile.nim),     
-  //     namaDepan: body.upProfile.namaDepan?? undefined,
-  //     namaBelakang: body.upProfile.namaBelakang?? undefined,
-  //     alamat: body.upProfile.alamat?? undefined,
-  //     nomorHp: body.upProfile.nomorHp?? undefined,
-  //     jenisKelamin: body.upProfile.jenisKelamin?? undefined,
-  //     tempatLahir: body.upProfile.tempatLahir?? undefined,
-  //     tanggalLahir: body.upProfile.tanggalLahir?? undefined,
-  //     tahunAngkatan:  antiTahun(body.upProfile.tahunAngkatan),
-  //     jurusan: body.upProfile.jurusan?? undefined,
-      
-
-  //   },
-  //   where: {
-  //     Id: body.profileId
-  //   },
-  // });
-
-  // let success = {
-  //   data: {
-  //     data: "Data Berhasil Update",
-  //     usr: usr,
-  //     prof: prof,
-  //   },
-  // };
-
-  // res.status(200).json(success.data.data);
-  console.log(fotoProf)
-  res.json(body)
+  let success = {
+    data: {
+      data: "Data Berhasil Update",
+      usr: usr,
+      prof: prof,
+    },
+  };
+ 
+  res.status(200).json(success.data.data);
+  // console.log(fotoProf)
+  // res.json(body)
 });
 
 const DeleteProfile = expressAsyncHandler(async (req, res) => {

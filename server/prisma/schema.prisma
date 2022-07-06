@@ -46,26 +46,26 @@ model profile {
   jabatan       jabatan?
   divisi        divisi?
   jurusan       jurusan?
-  FotoKtp       FotoKtp?     @relation(fields: [fotoKtpId], references: [id])
-  FotoProfile   FotoProfile? @relation(fields: [fotoProfileId], references: [id])
-  fotoKtpId     Int?
-  fotoProfileId Int?
+  // FotoKtp       FotoKtp?     @relation(fields: [fotoKtpId], references: [id])
+  // FotoProfile   FotoProfile? @relation(fields: [fotoProfileId], references: [id])
+  // fotoKtpId     Int?
+  // fotoProfileId Int?
+  FotoKtp       FotoKtp?
+  FotoProfile   FotoProfile?
 }
 
 model FotoKtp {
-  id Int @id @default(autoincrement())
-  Gallery   gallery?  @relation(fields: [galleryId], references: [Id])
-  profileId Int?
-  galleryId Int?
-  profile   profile[]
+  id        Int      @id @default(autoincrement())
+  gambarKtp String
+  Profile   profile? @relation(fields: [profileId], references: [Id])
+  profileId Int?     @unique
 }
 
 model FotoProfile {
-  id Int @id @default(autoincrement())
-  Gallery   gallery?  @relation(fields: [galleryId], references: [Id])
-  profileId Int?
-  galleryId Int?
-  profile   profile[]
+  id            Int      @id @default(autoincrement())
+  gambarProfile String
+  Profile       profile? @relation(fields: [profileId], references: [Id])
+  profileId     Int?     @unique
 }
 
 model jabatan {
@@ -130,9 +130,6 @@ model gallery {
   gambar         String
   Rencanakerja   rencanakerja? @relation(fields: [rencanakerjaId], references: [Id])
   rencanakerjaId Int?
-
-  FotoKtp     FotoKtp[]
-  FotoProfile FotoProfile[]
 }
 
 model kritiksaran {

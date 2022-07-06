@@ -101,7 +101,7 @@ function UpdateProfile() {
             title={"NIM"}
             placeholder={antiNim(dataProfile.val)}
             onChange={(s) => {
-              body.upProfile.nim = s.target.value;
+              body.upProfile.nim  = s.target.value;
               //   console.log(s.target.value);
             }}
           />
@@ -206,12 +206,12 @@ function UpdateProfile() {
           /> */}
           <hr />
           
-          <ImageUpload
+          {/* <ImageUpload
           hasilgambar = {(a) =>{
             body.upProfile.gambar = a
             console.log(body)
           }}
-          />
+          /> */}
 
           <div>
             <label className="p-2">Foto KTP : </label>

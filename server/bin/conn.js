@@ -13,7 +13,7 @@ function runServer() {
 }
 
 function prismaMigrate() {
-  execSync(`npx prisma migrate dev --name 'apa'`, {
+  execSync(`npx prisma migrate dev --name 'baru ini'`, {
     stdio: "inherit",
     cwd: _server,
   });

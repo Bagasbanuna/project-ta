@@ -22,7 +22,7 @@ CREATE TABLE `user` (
 -- CreateTable
 CREATE TABLE `profile` (
     `Id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nim` INTEGER NOT NULL,
+    `nim` INTEGER NULL,
     `namaDepan` VARCHAR(191) NULL,
     `namaBelakang` VARCHAR(191) NULL,
     `alamat` VARCHAR(191) NULL,
@@ -31,13 +31,31 @@ CREATE TABLE `profile` (
     `jenisKelamin` VARCHAR(191) NULL,
     `nomorHp` VARCHAR(191) NULL,
     `tahunAngkatan` INTEGER NULL,
-    `fotoKtp` VARCHAR(191) NULL,
-    `fotoProfile` VARCHAR(191) NULL,
     `userId` INTEGER NULL,
 
     UNIQUE INDEX `profile_nim_key`(`nim`),
     UNIQUE INDEX `profile_userId_key`(`userId`),
     PRIMARY KEY (`Id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `FotoKtp` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `gambarKtp` VARCHAR(191) NOT NULL,
+    `profileId` INTEGER NULL,
+
+    UNIQUE INDEX `FotoKtp_profileId_key`(`profileId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `FotoProfile` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `gambarProfile` VARCHAR(191) NOT NULL,
+    `profileId` INTEGER NULL,
+
+    UNIQUE INDEX `FotoProfile_profileId_key`(`profileId`),
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -80,6 +98,7 @@ CREATE TABLE `rencanakerja` (
     `updateAt` DATETIME(3) NULL,
     `status` VARCHAR(191) NULL,
     `userId` INTEGER NULL,
+    `statusRenjaId` INTEGER NULL DEFAULT 1,
 
     PRIMARY KEY (`Id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -127,7 +146,6 @@ CREATE TABLE `kritiksaran` (
 CREATE TABLE `StatusRenja` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `rencanakerjaId` INTEGER NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -137,6 +155,12 @@ ALTER TABLE `Roles` ADD CONSTRAINT `Roles_userId_fkey` FOREIGN KEY (`userId`) RE
 
 -- AddForeignKey
 ALTER TABLE `profile` ADD CONSTRAINT `profile_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `FotoKtp` ADD CONSTRAINT `FotoKtp_profileId_fkey` FOREIGN KEY (`profileId`) REFERENCES `profile`(`Id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `FotoProfile` ADD CONSTRAINT `FotoProfile_profileId_fkey` FOREIGN KEY (`profileId`) REFERENCES `profile`(`Id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `jabatan` ADD CONSTRAINT `jabatan_profileId_fkey` FOREIGN KEY (`profileId`) REFERENCES `profile`(`Id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -151,6 +175,9 @@ ALTER TABLE `jurusan` ADD CONSTRAINT `jurusan_profileId_fkey` FOREIGN KEY (`prof
 ALTER TABLE `rencanakerja` ADD CONSTRAINT `rencanakerja_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `rencanakerja` ADD CONSTRAINT `rencanakerja_statusRenjaId_fkey` FOREIGN KEY (`statusRenjaId`) REFERENCES `StatusRenja`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `files` ADD CONSTRAINT `files_rencanakerjaId_fkey` FOREIGN KEY (`rencanakerjaId`) REFERENCES `rencanakerja`(`Id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -161,6 +188,3 @@ ALTER TABLE `gallery` ADD CONSTRAINT `gallery_rencanakerjaId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `kritiksaran` ADD CONSTRAINT `kritiksaran_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `StatusRenja` ADD CONSTRAINT `StatusRenja_rencanakerjaId_fkey` FOREIGN KEY (`rencanakerjaId`) REFERENCES `rencanakerja`(`Id`) ON DELETE SET NULL ON UPDATE CASCADE;

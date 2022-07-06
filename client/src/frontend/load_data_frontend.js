@@ -21,7 +21,7 @@ async function ListJurusan() {
   const data = await axios
   .get("http://localhost:5000/api/v1/jurusan")
   .then((e) =>{
-    console.log(JSON.stringify(e, null, 3),"Summon List Jurusan")
+    console.log(JSON.stringify(e.data, null, 3),"Summon List Jurusan")
     listJurusan.val = e.data
   })
 }
