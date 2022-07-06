@@ -53,8 +53,8 @@ function UpdateProfile() {
                 body.userId = user.Id;
                 body.profileId = dataProfile.val.profile.Id;
 
-                console.log(body);
-                console.log(dataProfile);
+                // console.log(body);
+                // console.log(dataProfile);
                 axios
                   .post("http://localhost:5000/api/v1/profile/update", body)
                   .then((a) => {
@@ -62,7 +62,7 @@ function UpdateProfile() {
                       ProfileData();
                       nav("/profile");
                     } else {
-                      console.log(a.data);
+                      console.log("Berhasil");
                     }
                   });
               }}

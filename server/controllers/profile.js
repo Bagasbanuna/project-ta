@@ -4,6 +4,7 @@ const expressAsyncHandler = require("express-async-handler");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 const prisma = new PrismaClient();
+const _ = require("lodash");
 
 const GetProfile = expressAsyncHandler(async (req, res) => {
   //   let prof = await prisma.user.findMany({
@@ -27,12 +28,11 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
   //   });
 
   let Id = req.params.Id;
-  console.log(Id);
+  // console.log(Id);
 
   let prf = await prisma.user.findUnique({
     where: {
       Id: Number(Id),
-
     },
     include: {
       profile: {
@@ -61,7 +61,6 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
 
 const CreateProfile = expressAsyncHandler(async (req, res) => {
   let body = req.body;
-
 
   let prof = await prisma.profile.create({
     data: {
@@ -105,73 +104,81 @@ const CreateProfile = expressAsyncHandler(async (req, res) => {
   res.status(200).json(success, "Data Berhasil Di creat");
 });
 
+function antiNim(body) {
+  try {
+    Number(body.upProfile.nim);
+    return Number(body.upProfile.nim);
+  } catch (error) {
+    return undefined;
+  }
+}
+
+function antiTahun(body) {
+  try {
+    Number(body.upProfile.tahunAngkatan);
+    return;
+  } catch (error) {
+    return undefined;
+  }
+}
+
 const UpdateProfile = expressAsyncHandler(async (req, res) => {
   let body = req.body;
-  console.log(body)
+  // let name = Number(body.upProfile.nim)
+  // console.log( _.isNaN(name));
   // console.log(body.dataUser);
   // console.log(body.dataProfile);
 
   let usr = await prisma.user.update({
     data: {
-      username: body.dataUser.username?? undefined,
-      email: body.dataUser.email?? undefined,
+      username: body.dataUser.username ?? undefined,
+      email: body.dataUser.email ?? undefined,
     },
     where: {
       Id: body.userId,
     },
   });
 
+  // Kalo tanda tanya 1 ?  nanyak di depan nya , setelah tandan tanya pertama itu jawaban , setelah  titik : adalah jawban kedua
+  // bisa di bilang ini adalah IF else dark web
+  // kaLO dua tanda tanya ?? kalo didepan tanda tanya jika benaar nilai nya kembali kedepan , kalao sallah dibelakang nya
+  let data = {
+    nim: _.isNaN(Number(body.upProfile.nim))
+      ? undefined
+      : Number(body.upProfile.nim),
 
+    tahunAngkatan: _.isNaN(Number(body.upProfile.tahunAngkatan))
+      ? undefined
+      : Number(body.upProfile.tahunAngkatan),
 
-  function antiNim(data){
-    try {
-      return Number(data.profile.nim)
-    } catch (error) {
-      return undefined
-    }
-  }
-
-  function antiTahun(data){
-    try {
-      return Number(data.profile.tahunAngkatan)
-    } catch (error) {
-      return undefined
-    }
-  }
+    namaDepan: body.upProfile.namaDepan ?? undefined,
+    namaBelakang: body.upProfile.namaBelakang ?? undefined,
+    alamat: body.upProfile.alamat ?? undefined,
+    nomorHp: body.upProfile.nomorHp ?? undefined,
+    jenisKelamin: body.upProfile.jenisKelamin ?? undefined,
+    tempatLahir: body.upProfile.tempatLahir ?? undefined,
+    tanggalLahir: body.upProfile.tanggalLahir ?? undefined,
+    jurusan: body.upProfile.jurusan ?? undefined,
+  };
 
   let prof = await prisma.profile.update({
-    data: {
-      // ?? undefined adalah Untuk cek data null
-
-      nim: antiNim(body.upProfile.nim),
-      tahunAngkatan: antiTahun(body.upProfile.tahunAngkatan),
-
-      // nim: antiNim(body.upProfile.nim), 
-      namaDepan: body.upProfile.namaDepan?? undefined,
-      namaBelakang: body.upProfile.namaBelakang?? undefined,
-      alamat: body.upProfile.alamat?? undefined,
-      nomorHp: body.upProfile.nomorHp?? undefined,
-      jenisKelamin: body.upProfile.jenisKelamin?? undefined,
-      tempatLahir: body.upProfile.tempatLahir?? undefined,
-      tanggalLahir: body.upProfile.tanggalLahir?? undefined,
-      jurusan: body.upProfile.jurusan?? undefined,
-    },
+    data,
     where: {
-      Id: body.profileId
+      Id: body.profileId,
     },
   });
 
   let success = {
-    data: {
-      data: "Data Berhasil Update",
+    message: "Data Update Berhasil",
+    data: {    
       usr: usr,
       prof: prof,
     },
   };
- 
-  res.status(200).json(success.data.data);
-  // console.log(fotoProf)
-  // res.json(body)
+
+  // console.log(prof);
+  res.status(200).json(success);
+  // res.json(prof);
 });
 
 const DeleteProfile = expressAsyncHandler(async (req, res) => {
