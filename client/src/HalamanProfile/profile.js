@@ -139,7 +139,7 @@ function TampilanProfile() {
 
           <hr />
         </div>
-
+ 
         {/* TOMBOL */}
         <div className="row m-auto">
           <div className="col">
@@ -150,7 +150,11 @@ function TampilanProfile() {
              />
           </div>
           <div className="col">
-            <Tombol title={"Simpan"} warna={"primary"} />
+            <Tombol title={"Simpan"} warna={"primary"}
+            onClick={(a)=>{
+              nav("/")
+            }}
+            />
           </div>
         </div>
       </div>

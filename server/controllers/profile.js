@@ -41,15 +41,15 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
           FotoProfile: {
             select: {
               id: true,
-              gambarProfile: true
+              gambarProfile: true,
             },
           },
           FotoKtp: {
             select: {
               id: true,
-              gambarKtp: true
-            }
-          }
+              gambarKtp: true,
+            },
+          },
         },
       },
     },
@@ -106,10 +106,9 @@ const CreateProfile = expressAsyncHandler(async (req, res) => {
   res.status(200).json(success, "Data Berhasil Di creat");
 });
 
-function antiNim(body) {
+function antiFotoP(body) {
   try {
-    Number(body.upProfile.nim);
-    return Number(body.upProfile.nim);
+    return body.upProfile.gambarProfile;
   } catch (error) {
     return undefined;
   }
@@ -133,84 +132,85 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   console.log(body.profileId);
   console.log(body.upProfile);
 
-  let fotoP = await prisma.fotoProfile.upsert({
-    create: {
-      profileId: body.profileId,
-      gambarProfile: body.upProfile.gambarProfile
-    },update: {
-      gambarProfile: body.upProfile.gambarProfile
-    },
-    where: {
-      profileId: body.profileId
-    }
-  })
+  // let fotoP = await prisma.fotoProfile.upsert({
+  //   create: {
+  //     profileId: Number(body.profileId),
+  //     gambarProfile: antiFotoP(body.upProfile.gambarProfile),
+  //   },
+  //   update: {
+  //     gambarProfile: antiFotoP(body.upProfile.gambarProfile),
+  //   },
+  //   where: {
+  //     id: Number(body.profileId),
+  //   },
+  // });
 
   // let fotoK = await prisma.fotoKtp.upsert({
   //   create: {
-  //     profileId: body.profileId,
-  //     // gambarKtp: body.upProfile.gambarKtp?? undefined
-  //     gambarKtp: _.isEmpty(body.upProfile.gambarKtp)
+  //     profileId: Number(body.profileId),
+  //     gambarKtp: body.upProfile.gambarKtp ?? undefined
   //   },update: {
-  //     gambarKtp: body.upProfile.gambarKtp
+  //     gambarKtp: body.upProfile.gambarKtp ?? undefined
   //   },
   //   where: {
-  //   id: body.profileId
+  //    id: Number(body.profileId)
   //   }
   // })
   // console.log(fotoK)
 
-  // let usr = await prisma.user.update({
-  //   data: {
-  //     username: body.dataUser.username ?? undefined,
-  //     email: body.dataUser.email ?? undefined,
-  //   },
-  //   where: {
-  //     Id: body.userId,
-  //   },
-  // });
+  let usr = await prisma.user.update({
+    data: {
+      username: body.dataUser.username ?? undefined,
+      email: body.dataUser.email ?? undefined,
+    },
+    where: {
+      Id: body.userId,
+    },
+  });
 
-  // // Kalo tanda tanya 1 ?  nanyak di depan nya , setelah tandan tanya pertama itu jawaban , setelah  titik : adalah jawban kedua
-  // // bisa di bilang ini adalah IF else dark web
-  // // kaLO dua tanda tanya ?? kalo didepan tanda tanya jika benaar nilai nya kembali kedepan , kalao sallah dibelakang nya
-  // let data = {
-  //   nim: _.isNaN(Number(body.upProfile.nim))
-  //     ? undefined
-  //     : Number(body.upProfile.nim),
+  // Kalo tanda tanya 1 ?  nanyak di depan nya , setelah tandan tanya pertama itu jawaban , setelah  titik : adalah jawban kedua
+  // bisa di bilang ini adalah IF else dark web
+  // kaLO dua tanda tanya ?? kalo didepan tanda tanya jika benaar nilai nya kembali kedepan , kalao sallah dibelakang nya
+  let data = {
+    nim: _.isNaN(Number(body.upProfile.nim))
+      ? undefined
+      : Number(body.upProfile.nim),
 
-  //   tahunAngkatan: _.isNaN(Number(body.upProfile.tahunAngkatan))
-  //     ? undefined
-  //     : Number(body.upProfile.tahunAngkatan),
+    tahunAngkatan: _.isNaN(Number(body.upProfile.tahunAngkatan))
+      ? undefined
+      : Number(body.upProfile.tahunAngkatan),
 
-  //   namaDepan: body.upProfile.namaDepan ?? undefined,
-  //   namaBelakang: body.upProfile.namaBelakang ?? undefined,
-  //   alamat: body.upProfile.alamat ?? undefined,
-  //   nomorHp: body.upProfile.nomorHp ?? undefined,
-  //   jenisKelamin: body.upProfile.jenisKelamin ?? undefined,
-  //   tempatLahir: body.upProfile.tempatLahir ?? undefined,
-  //   tanggalLahir: body.upProfile.tanggalLahir ?? undefined,
-  //   jurusan: body.upProfile.jurusan ?? undefined,
-  // };
+    namaDepan: body.upProfile.namaDepan ?? undefined,
+    namaBelakang: body.upProfile.namaBelakang ?? undefined,
+    alamat: body.upProfile.alamat ?? undefined,
+    nomorHp: body.upProfile.nomorHp ?? undefined,
+    jenisKelamin: body.upProfile.jenisKelamin ?? undefined,
+    tempatLahir: body.upProfile.tempatLahir ?? undefined,
+    tanggalLahir: body.upProfile.tanggalLahir ?? undefined,
+    jurusan: body.upProfile.jurusan ?? undefined,
+  };
 
-  // let prof = await prisma.profile.update({
-  //   data,
-  //   where: {
-  //     Id: body.profileId,
-  //   },
-  // });
+  let prof = await prisma.profile.update({
+    data,
+    where: {
+      Id: body.profileId,
+    },
+  });
 
-  // let success = {
-  //   message: "Data Update Berhasil",
-  //   data: {    
-  //     usr: usr,
-  //     prof: prof,
-  //     fotoK: fotoK
-  //   },
-  // };
+  let success = {
+    message: "Data Update Berhasil",
+    data: {
+      usr: usr,
+      prof: prof,
+      // fotoP: fotoP,
+      // fotoK: fotoK
+    },
+  };
 
-  console.log(fotoP)
-  // res.status(200).json(success);
-  // console.log(body);
-  res.json(body);
+  console.log(body);
+  res.status(200).json(success);
+  // console.log(fotoP)
+  // res.json(body);
 });
 
 const DeleteProfile = expressAsyncHandler(async (req, res) => {
@@ -224,4 +224,29 @@ const DeleteProfile = expressAsyncHandler(async (req, res) => {
   res.status(201).json(prof);
 });
 
-module.exports = { GetProfile, CreateProfile, UpdateProfile, DeleteProfile };
+const UploadFotoProfile = expressAsyncHandler(async (req, res) => {
+  let body = req.body;
+
+  let fotoP = await prisma.fotoProfile.upsert({
+    create: {
+      profileId: Number(body.profileId),
+      gambarProfile: body.gambarProfile,
+    },
+    update: {
+      gambarProfile: body.gambarProfile,
+    },
+    where: {
+      id: Number(body.profileId),
+    },
+  });
+  res.json(fotoP)
+});
+
+module.exports = {
+  GetProfile,
+  CreateProfile,
+  UpdateProfile,
+  DeleteProfile,
+  //GAMBAR
+  UploadFotoProfile
+};

@@ -56,14 +56,14 @@ model FotoKtp {
   id        Int      @id @default(autoincrement())
   gambarKtp String
   Profile   profile? @relation(fields: [profileId], references: [Id])
-  profileId Int?     @unique
+  profileId Int?     
 }
 
 model FotoProfile {
   id            Int      @id @default(autoincrement())
   gambarProfile String
   Profile       profile? @relation(fields: [profileId], references: [Id])
-  profileId     Int?     @unique
+  profileId     Int?     
 }
 
 model jabatan {

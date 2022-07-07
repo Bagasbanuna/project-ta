@@ -130,19 +130,19 @@ function Wadah({ upd, state }) {
               <tr>
                 <th>NIM</th>
                 <th>Nama Depan</th>
-                {/* <th>Nama Belakang</th> */}
+                <th>Nama Belakang</th>
                 <th>Jurusan</th>
                 <th>Jabatan</th>
                 <th>Divisi</th>
                 <th>Alamat</th>
                 <th>Tempat Lahir</th>
                 <th>Tanggal Lahir</th>
-                {/* <th>Jenis Kelamin</th>
-                <th>Nomor HP</th> */}
+                <th>Jenis Kelamin</th>
+                <th>Nomor HP</th>
                 <th>Angkatan</th>
                 <th>Foto</th>
                 <th>Foto KTP</th>
-                <th>Aksi</th> 
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -152,16 +152,17 @@ function Wadah({ upd, state }) {
                 ) : (
                   <tr key={e.Id}>
                     <td>{e.profile.nim}</td>
-                    <td>{cekPofile(e, "namaDepan")}</td>
-                    {/* <td>{cekPofile(e, "namaBelakang")}</td> */}
+                    <td>{e.profile.namaDepan}</td>
+                    {/* <td>{cekPofile(e, "namaDepan")}</td> */}
+                    <td>{cekPofile(e, "namaBelakang")}</td>
                     <td>{cekNull(e)}</td>
                     <td>{cekDvs(e)}</td>
                     <td>{cekJbtn(e)}</td>
                     <td>{cekPofile(e, "alamat")}</td>
                     <td>{cekPofile(e, "tempatLahir")}</td>
                     <td>{cekPofile(e, "tanggalLahir")}</td>
-                    {/* <td>{cekPofile(e, "jenisKelamin")}</td>
-                    <td>{cekPofile(e, "nomorHp")}</td> */}
+                    <td>{cekPofile(e, "jenisKelamin")}</td>
+                    <td>{cekPofile(e, "nomorHp")}</td>
                     <td>{cekPofile(e, "tahunAngkatan")}</td>
                     <td>{cekPofile(e, "fotoProfile")}</td>
                     <td>{cekPofile(e, "fotoKtp")}</td>

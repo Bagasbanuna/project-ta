@@ -194,8 +194,7 @@ function UpdateProfile() {
               })}
             </select>
           </div>
-
-          <hr />
+           <hr />
           <label>Upload Foto Profile</label>
           <ImageUpload
           hasilgambar={(a)=> {

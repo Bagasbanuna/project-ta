@@ -7,7 +7,7 @@ const { GetnamaFile, CreatenamaFile, UpdatenamaFile, DeletenamaFile } = require(
 const { GetJurusan, CreateJurusan, UpdateJurusan, DeleteJurusan } = require("./controllers/jurusan");
 const { GetKritiksaran, CreateKritiksaran, UpdateKritiksaran, DeleteKritiksaran } = require("./controllers/kritiksaran");
 const { CreateLogin } = require("./controllers/login");
-const { GetProfile, CreateProfile, UpdateProfile, DeleteProfile } = require("./controllers/profile");
+const { GetProfile, CreateProfile, UpdateProfile, DeleteProfile, UploadFotoProfile } = require("./controllers/profile");
 const { CreateRegistrasi } = require("./controllers/registrasi");
 const { GetRencanakerja, CreateRencanakerja, UpdateRencanakerja, DeleteRencanakerja, GetRenjaOn, GetRenjaAcc, GetRenjaDone, GetRenjaCancel, UpdateStatusRenja } = require("./controllers/rencanakerja");
 const { GetRenjaByUser } = require("./controllers/rencanakerja_by_user");
@@ -30,6 +30,8 @@ api.get('/profile/:Id', GetProfile)
 api.post('/profile', CreateProfile)
 api.post('/profile/update', UpdateProfile)
 api.delete('/profile/delete/:Id', DeleteProfile)
+
+api.post('/profile/uploadfoto', UploadFotoProfile)
 
 //jabatan
 api.get('/jabatan', GetJabatan)
