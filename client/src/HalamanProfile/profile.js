@@ -132,6 +132,11 @@ function TampilanProfile() {
             />
             {/* {dataProfile.val.} */}
           </div>
+
+
+
+
+
           <hr />
         </div>
 
@@ -230,15 +235,16 @@ function antiJurusan(data) {
 }
 function antiKtp(data) {
   try {
-    console.log(data.profile.FotoKtp.gambarKtp)
-    return data.profile.FotoKtp.gambarKtp;
+    console.log(data.profile.FotoKtp[0].gambarKtp)
+    return data.profile.FotoKtp[0].gambarKtp;
   } catch (error) {
     return "kosong.jpg";
   }
 }
 function antiFotoP(data) {
   try {
-    return data.profile.FotoProfile[0];
+    console.log(data.profile.FotoProfile[0].gambarProfile)
+    return data.profile.FotoProfile[0].gambarProfile;
   } catch (error) {
     return "kosong.jpg";
   }

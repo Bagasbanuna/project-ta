@@ -39,7 +39,7 @@ function UpdateProfile() {
     <div>Data Belum Ada </div>
   ) : (
     <div className="container d-flex justify-content-end">
-      <div className="col-sm-12 col-md-6 col-lg-4 card mt-4 p-2">
+      <div className="col-sm-12 col-md-6 col-lg-4 card mt-4 mb-4 p-2">
         <h3>Update Profile</h3>
         <div className="row m-auto">
           <div className="col">
@@ -196,22 +196,31 @@ function UpdateProfile() {
           </div>
 
           <hr />
-
+          <label>Upload Foto Profile</label>
+          <ImageUpload
+          hasilgambar={(a)=> {
+            body.upProfile.gambarProfile = a
+            console.log(body, "Foto Profile")
+          }}
+          />
+          <br/>
+          
+          <label>Upload Foto KTP</label>
           <ImageUpload
             hasilgambar={(a) => {
               body.upProfile.gambarKtp = a
-              console.log(body);
+              console.log(body, "Foto KTP");
             }}
           />
 
-          <div>
+          {/* <div>
             <label className="p-2">Foto KTP : </label>
             <img
               className="border border-primary"
               style={{ width: "100%", height: 150 }}
               src={"http://localhost:5000/images/" + antiKtp(dataProfile.val)}
             />
-          </div>
+          </div> */}
 
           <hr />
         </div>

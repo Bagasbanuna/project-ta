@@ -48,8 +48,8 @@ const GetProfile = expressAsyncHandler(async (req, res) => {
             select: {
               id: true,
               gambarKtp: true
-            },
-          },
+            }
+          }
         },
       },
     },
@@ -132,20 +132,32 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   // console.log( _.isNaN(name));
   console.log(body.profileId);
   console.log(body.upProfile);
-  
 
-  let fotoK = await prisma.fotoKtp.upsert({
+  let fotoP = await prisma.fotoProfile.upsert({
     create: {
       profileId: body.profileId,
-      gambarKtp: body.upProfile.gambarKtp
+      gambarProfile: body.upProfile.gambarProfile
     },update: {
-      gambarKtp: body.upProfile.gambarKtp
+      gambarProfile: body.upProfile.gambarProfile
     },
     where: {
-    id: body.profileId
+      profileId: body.profileId
     }
   })
-  console.log(fotoK)
+
+  // let fotoK = await prisma.fotoKtp.upsert({
+  //   create: {
+  //     profileId: body.profileId,
+  //     // gambarKtp: body.upProfile.gambarKtp?? undefined
+  //     gambarKtp: _.isEmpty(body.upProfile.gambarKtp)
+  //   },update: {
+  //     gambarKtp: body.upProfile.gambarKtp
+  //   },
+  //   where: {
+  //   id: body.profileId
+  //   }
+  // })
+  // console.log(fotoK)
 
   // let usr = await prisma.user.update({
   //   data: {
@@ -195,7 +207,7 @@ const UpdateProfile = expressAsyncHandler(async (req, res) => {
   //   },
   // };
 
-  // console.log(fotoK)
+  console.log(fotoP)
   // res.status(200).json(success);
   // console.log(body);
   res.json(body);
