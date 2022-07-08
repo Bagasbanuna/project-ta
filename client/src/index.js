@@ -50,6 +50,7 @@ ReactDOM.createRoot(document.getElementById('root')).render
                 {MyRouter.Pengumuman().Router()}
                 {MyRouter.Profile().Router()}
                 {MyRouter.UpdateProfile().Router()}
+                {MyRouter.UploadFoto().Router()}
                 {/* {MyRouter.halaman_admin().Router()} */}
                 {/* {MyRouter.halaman_dashboard().Router()} */}
 

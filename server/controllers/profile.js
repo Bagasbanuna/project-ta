@@ -227,19 +227,21 @@ const DeleteProfile = expressAsyncHandler(async (req, res) => {
 const UploadFotoProfile = expressAsyncHandler(async (req, res) => {
   let body = req.body;
 
-  let fotoP = await prisma.fotoProfile.upsert({
-    create: {
-      profileId: Number(body.profileId),
-      gambarProfile: body.gambarProfile,
-    },
-    update: {
-      gambarProfile: body.gambarProfile,
-    },
-    where: {
-      id: Number(body.profileId),
-    },
-  });
-  res.json(fotoP)
+  // let fotoP = await prisma.fotoProfile.upsert({
+  //   create: {
+  //     profileId: Number(body.profileId),
+  //     gambarProfile: body.gambarProfile,
+  //   },
+  //   update: {
+  //     gambarProfile: body.gambarProfile,
+  //   },
+  //   where: {
+  //     id: Number(body.profileId),
+  //   },
+  // });
+  // res.json(fotoP)
+  console.log(body)
+  res.json(body)
 });
 
 module.exports = {

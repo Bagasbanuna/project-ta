@@ -195,22 +195,7 @@ function UpdateProfile() {
             </select>
           </div>
            <hr />
-          <label>Upload Foto Profile</label>
-          <ImageUpload
-          hasilgambar={(a)=> {
-            body.upProfile.gambarProfile = a
-            console.log(body, "Foto Profile")
-          }}
-          />
-          <br/>
           
-          <label>Upload Foto KTP</label>
-          <ImageUpload
-            hasilgambar={(a) => {
-              body.upProfile.gambarKtp = a
-              console.log(body, "Foto KTP");
-            }}
-          />
 
           {/* <div>
             <label className="p-2">Foto KTP : </label>

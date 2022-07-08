@@ -7,6 +7,7 @@ import { TampilanProfile } from "./HalamanProfile/profile"
 import { UpdateProfile } from "./HalamanProfile/update_profile"
 import { HalamanAdmin } from "./HalamanAdmin/admin"
 import { Dashboard } from "./HalamanAdmin/dashboard"
+import { UploadFoto } from "./HalamanProfile/upload_foto"
 
 /**
  * **jangan lupa panggil init nya**
@@ -56,6 +57,11 @@ const MyRouter = {
     UpdateProfile(){
         this.path ='/update-profile'
         this.element = <UpdateProfile/>
+        return this;
+    },
+    UploadFoto(){
+        this.path='/uploadfoto'
+        this.element = <UploadFoto/>
         return this;
     },
 

@@ -76,13 +76,25 @@ function TampilanProfile() {
           </div> */}
 
           <div className="d-flex justify-content-center">
-            
             <img
               className="rounded-circle"
               style={{ width: 100, height: 100 }}
               src={"http://localhost:5000/images/" + antiFotoP(dataProfile.val)}
             />
           </div>
+          <br></br>
+          <div className="d-flex justify-content-center">
+            <Tombol
+              title={"update foto"}
+              // warna={"secondary"}
+              className={"btn btn-outline-secondary btn-sm "}
+              onClick={(a)=> {
+                MyRouter.UploadFoto().Go()
+              }}
+
+            />
+          </div>
+
           <Formulir title={"Username"} placeholder={dataProfile.val.username} />
           <Formulir title={"Email"} placeholder={dataProfile.val.email} />
           <Formulir title={"NIM"} placeholder={antiNim(dataProfile.val)} />
@@ -133,27 +145,27 @@ function TampilanProfile() {
             {/* {dataProfile.val.} */}
           </div>
 
-
-
-
-
           <hr />
         </div>
- 
+
         {/* TOMBOL */}
         <div className="row m-auto">
           <div className="col">
-            <Tombol title={"Edit"} warna={"success"}
-             onClick={(a)=> {
-               nav("/update-profile")
-             }}
-             />
+            <Tombol
+              title={"Edit"}
+              warna={"success"}
+              onClick={(a) => {
+                nav("/update-profile");
+              }}
+            />
           </div>
           <div className="col">
-            <Tombol title={"Simpan"} warna={"primary"}
-            onClick={(a)=>{
-              nav("/")
-            }}
+            <Tombol
+              title={"Simpan"}
+              warna={"primary"}
+              onClick={(a) => {
+                nav("/");
+              }}
             />
           </div>
         </div>
@@ -239,7 +251,7 @@ function antiJurusan(data) {
 }
 function antiKtp(data) {
   try {
-    console.log(data.profile.FotoKtp[0].gambarKtp)
+    console.log(data.profile.FotoKtp[0].gambarKtp);
     return data.profile.FotoKtp[0].gambarKtp;
   } catch (error) {
     return "kosong.jpg";
@@ -247,7 +259,7 @@ function antiKtp(data) {
 }
 function antiFotoP(data) {
   try {
-    console.log(data.profile.FotoProfile[0].gambarProfile)
+    console.log(data.profile.FotoProfile[0].gambarProfile);
     return data.profile.FotoProfile[0].gambarProfile;
   } catch (error) {
     return "kosong.jpg";
