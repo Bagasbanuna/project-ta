@@ -1,5 +1,6 @@
 import { listRenja, orang } from "../store"
 
+
 function Dashboard(){
     orang.init();
     listRenja.init()
@@ -22,8 +23,13 @@ function Dashboard(){
                     </button> */}
                 </div>
             </div>
+            <div>
+            
+            
 
-            <canvas width={100} height={1000}></canvas>
+            </div>
+
+            
             <div>
                 
             </div>

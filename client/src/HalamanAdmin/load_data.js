@@ -62,6 +62,8 @@ function loadKabeh() {
   renjaAcc.init();
 }
 
+
+
 export {
   ambilDataRenja,
   statusRenja,
