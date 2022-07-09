@@ -51,6 +51,7 @@ ReactDOM.createRoot(document.getElementById('root')).render
                 {MyRouter.Profile().Router()}
                 {MyRouter.UpdateProfile().Router()}
                 {MyRouter.UploadFoto().Router()}
+                {MyRouter.UpdateUploadFoto().Router()}
                 {/* {MyRouter.halaman_admin().Router()} */}
                 {/* {MyRouter.halaman_dashboard().Router()} */}
 

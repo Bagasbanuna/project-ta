@@ -7,6 +7,34 @@ import { Formulir, MyForm, NewForm } from "../lib/form";
 import { MyRouter } from "../my_router";
 import { dataProfile } from "../store";
 
+function TombolUpdateFoto(){
+  let adaUser = window.localStorage.getItem("user") === null
+let idProfile = dataProfile.val.profile?.FotoProfile ?? []
+  console.log(idProfile, "hehe")
+
+  return idProfile.length > 0 ? (
+    <Tombol
+              title={"update foto"}
+              // warna={"secondary"}
+              className={"btn btn-outline-secondary btn-sm "}
+              onClick={(a)=> {
+                MyRouter.UpdateUploadFoto().Go()
+              }}
+
+            />
+  ) : (
+    <Tombol
+              title={"tambah profile"}
+              // warna={"secondary"}
+              className={"btn btn-outline-secondary btn-sm "}
+              onClick={(a)=> {
+                MyRouter.UploadFoto().Go()
+              }}
+
+            />
+  )
+} 
+
 /// TAMPILAN ///
 function TampilanProfile() {
   dataProfile.init();
@@ -62,19 +90,6 @@ function TampilanProfile() {
 
         <div>
           <hr />
-          {/* <div>
-            <label>NIM :</label>
-            <div>{antiNim(dataProfile.val)}</div>
-          </div>
-          <div>
-            <label>Nama Depan:</label>
-            <div>{antiNamaD(dataProfile.val)}</div>
-          </div>
-          <div>
-            <label>Nama Belakang :</label>
-            <div>{antiNamaB(dataProfile.val)}</div>
-          </div> */}
-
           <div className="d-flex justify-content-center">
             <img
               className="rounded-circle"
@@ -84,15 +99,7 @@ function TampilanProfile() {
           </div>
           <br></br>
           <div className="d-flex justify-content-center">
-            <Tombol
-              title={"update foto"}
-              // warna={"secondary"}
-              className={"btn btn-outline-secondary btn-sm "}
-              onClick={(a)=> {
-                MyRouter.UploadFoto().Go()
-              }}
-
-            />
+            <TombolUpdateFoto/>
           </div>
 
           <Formulir title={"Username"} placeholder={dataProfile.val.username} />

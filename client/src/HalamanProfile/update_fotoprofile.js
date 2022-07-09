@@ -8,34 +8,33 @@ import { dataProfile } from "../store";
 const body = {
   gambarProfile: "",
   gambarKtp: "",
-//   userId: "",
-  profileId: ""
+  fotoprofileid: "",
 };
 
-function UploadFoto() {
-    let user = JSON.parse(window.localStorage.getItem("user"))
-    // console.log(user)
+function UpdateFoto() {
+  let user = JSON.parse(window.localStorage.getItem("user"));
+  // console.log(user)
   let nav = useNavigate();
 
-  dataProfile.init()
-  if(dataProfile.val.length < 1){
-      ProfileData()
+  dataProfile.init();
+  if (dataProfile.val.length < 1) {
+    ProfileData();
   }
-  console.log(dataProfile.val.profile)
+  //   console.log(dataProfile.val.profile?.FotoProfile[0].id?? null)
 
   return (
     <div className="d-flex justify-content-center mt-5 p-5">
       <div className="col-sm-12 col-md-6 col-lg-4 card p-4 m-2">
         <div className="d-flex justify-content-center ">
-          <h4 className="">Tambah Foto</h4>
+          <h4 className="">Upload Foto</h4>
           {/* <h5>Profile danKTP</h5> */}
         </div>
         <div>
-          <label>Tambah Foto Profile</label>
+          <label>Upload Foto Profile</label>
           <ImageUpload
             hasilgambar={(a) => {
               body.gambarProfile = a;
-              console.log(body, "Foto Profile");
+              //   console.log(body, "Foto Profile");
             }}
           />
           <br />
@@ -54,13 +53,14 @@ function UploadFoto() {
           title={"Simpan"}
           warna={"primary"}
           onClick={() => {
+            // console.log(dataProfile.val.profile);
 
-            body.profileId = dataProfile.val.profile.Id
-            // console.log(body)
+            body.fotoprofileid = dataProfile.val.profile?.FotoProfile[0].id
+            console.log(body)
 
-              axios.post("http://localhost:5000/api/v1/profile/uploadfoto", body).
+              axios.post("http://localhost:5000/api/v1/profile/updatefotoprofile", body).
               then((a) =>{
-                  console.log(body)
+              console.log(body)
                   ProfileData()
                   nav("/profile");
               })
@@ -71,4 +71,4 @@ function UploadFoto() {
   );
 }
 
-export { UploadFoto };
+export { UpdateFoto };
