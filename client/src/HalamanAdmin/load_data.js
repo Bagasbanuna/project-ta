@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  DashboardOn,
   listRenja,
   listStatus,
   renjaAcc,
@@ -8,17 +9,21 @@ import {
   renjaOn,
 } from "../store";
 
+async function DashStatusOn() {
+  const data = await axios.get("http://localhost:5000/api/v1/dashboardOn");
+  DashboardOn.val = data.data;
+  console.log(data.data);
+}
+
 async function ambilDataRenja() {
   const data = await axios.get("http://localhost:5000/api/v1/rencanakerja");
   listRenja.val = data.data;
 }
 
 function statusRenja() {
-  axios
-  .get("http://localhost:5000/api/v1/status-renja")
-  .then((s) => {
+  axios.get("http://localhost:5000/api/v1/status-renja").then((s) => {
     listStatus.val = s.data;
-    console.log(s.data, "yess data Status")
+    console.log(s.data, "yess data Status");
   });
 }
 
@@ -72,4 +77,6 @@ export {
   statusRenjaDone,
   statusRenjaCancel,
   loadKabeh,
+  //Dashboard
+  DashStatusOn,
 };

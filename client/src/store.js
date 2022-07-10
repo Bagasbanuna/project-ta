@@ -18,6 +18,9 @@ const renjaCancel = new Rx("renjaCancel", []);
 const dataProfile = new Rx("dataProfile", []);
 const listJurusan = new Rx("listJurusan", [])
 
+//Dashboard
+const DashboardOn = new Rx("DashboardOn", [])
+
 const store = configureStore({
   reducer: {
     orang: orang.reducer,
@@ -36,6 +39,9 @@ const store = configureStore({
     //Client
     dataProfile: dataProfile.reducer,
     listJurusan: listJurusan.reducer,
+
+    //Dashboard
+    DashboardOn: DashboardOn.reducer
   },
 });
 
@@ -55,5 +61,8 @@ export {
   //Client
   dataProfile,
   listJurusan,
+
+  //Dashboard
+  DashboardOn
 
 };

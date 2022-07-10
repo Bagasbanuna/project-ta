@@ -1,33 +1,57 @@
-let user = [
-    {
-        "Id": 1,
-        "username": "abil",
-        "email": "bagas@gmail.com",
-        "password": "4321",
-        "createAt": "2022-04-19T16:18:39.898Z",
-        "updateAt": "2022-04-19T16:18:39.921Z"
-    },
-    {
-        "Id": 2, "username": "bagas", "email": "bagas@gmail.com", "password": "1234", "createAt": "2022-04-19T16:18:55.408Z", "updateAt": "2022-04-19T16:18:55.408Z"
-    }]
-
-//    for(let u of user){
-//        u.email = "malik@gmail"
-//    }
-
-// let bagas = user.find( data => data.username === "bagas")
+const PrismaClient = require('@prisma/client').PrismaClient;
+const prisma = new PrismaClient();
 
 
-// function cari(e) {
-//     return e.username === "bagas"
-// }
+(async () => {
+    const data1 = await prisma.statusRenja.aggregate({
+        _count: {
+            id: true
+        },
+        where: {
+            name: {
+                equals: 'On Progress'
+            }
+        }
+    })
 
-// console.log(bagas)
+    const data2 = await prisma.statusRenja.aggregate({
+        _count: {
+            name: true
+        },
 
-// function orang(nama, umur){
-//     return `namanya ${nama} dan umurnya ${umur}`
-// }
+        where: {
+            id: {
+                equals: 1
+            }
+        }
+    })
 
-// console.log(orang("bagas", "20"))
-// console.log(orang("malik", "20"))
-// console.log(orang("agus", "20"))
+    let data3 = await prisma.user.count()
+
+    let hasil = {
+        totalUser: data3
+    }
+
+    const dashOn = await prisma.rencanakerja.aggregate({
+        _count: {
+            statusRenjaId: true
+        },
+        where: {
+            statusRenjaId: {
+                equals: 1
+            }
+        }
+    })
+
+    const dashCcl = await prisma.rencanakerja.aggregate({
+        _count: {
+            statusRenjaId: true
+        },
+        where: {
+            statusRenjaId: {
+                equals: 4
+            }
+        }
+    })
+    console.log({dashOn,dashCcl})
+})()

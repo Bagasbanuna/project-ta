@@ -393,3 +393,6 @@ Content-Type: application/json
 {
     "Id" : 1
 }
+
+### Get DashOn
+GET http://localhost:5000/api/v1/dashboardOn HTTP/1.1

@@ -1,9 +1,21 @@
-import { listRenja, orang } from "../store"
+import { DashboardOn, listRenja, orang } from "../store"
+import { DashStatusOn } from "./load_data";
 
+var loaddata = true
 
+// DashStatusOn()
 function Dashboard(){
     orang.init();
     listRenja.init()
+
+
+    DashboardOn.init()
+    if(DashboardOn.val.length == 0){
+        DashStatusOn()
+        console.log(DashboardOn.val.length)
+    }
+    
+
     return(
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
            
@@ -24,6 +36,9 @@ function Dashboard(){
                 </div>
             </div>
             <div>
+                <div>Data Status Renja On Progres{(JSON.stringify(DashboardOn.val))}</div>
+                
+
             
             
 

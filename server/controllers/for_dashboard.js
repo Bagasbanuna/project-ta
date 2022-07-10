@@ -1,23 +1,23 @@
-import { PrismaClient } from "@prisma/client";
-import expressAsyncHandler from "express-async-handler";
+const { PrismaClient } = require("@prisma/client");
+const expressAsyncHandler = require("express-async-handler");
 const prisma = new PrismaClient()
 
 const DashOn = expressAsyncHandler(async (req, res) => {
 
-    let aggregations = await prisma.statusRenja.aggregate({
-        _avg: 
-        {
-            id: true
+    let aggregations = await prisma.rencanakerja.aggregate({
+        _count: {
+            statusRenjaId: true
         },
         where: {
-            name: 'On Progres'
-        }, 
-        take: 10
+            statusRenjaId: {
+                equals: 1
+            }
+        }
     })
 
-    console.log(aggregations)
-    res.json(aggregations)
+    // console.log(aggregations)
+    res.json([aggregations._count.statusRenjaId])
 })
 
-export {DashOn}
+module.exports = {DashOn}
 // Buat router dlu

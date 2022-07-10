@@ -15,6 +15,7 @@ const { routeStatusRenja, UpdateStatus } = require("./controllers/status_renja")
 const { GetUser, CreateUser, UpdateUser, DeleteUser } = require("./controllers/users");
 const { GetUserInclude } = require("./controllers/user_include");
 const { routeUpload } = require("./upload");
+const { DashOn } = require("./controllers/for_dashboard");
 const api = express.Router()
 
 api.use('/upload', routeUpload);
@@ -107,5 +108,8 @@ api.post('/login', CreateLogin)
 
 //
 api.get('/userInclude', GetUserInclude)
+
+//Dashboard
+api.get('/dashboardOn', DashOn)
 
 module.exports = {api}

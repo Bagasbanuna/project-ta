@@ -1,14 +1,18 @@
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { listRenja } from "../store";
-import { ambilDataRenja } from "./load_data";
+import { DashboardOn, listRenja } from "../store";
+import { ambilDataRenja, DashStatusOn } from "./load_data";
 import { MainAdmin } from "./main_admin";
 import { Sidebar } from "./sidebar";
 
 
+
+
 function HalamanAdmin() {
   ambilDataRenja();
+  // DashStatusOn()
+  // DashboardOn.init()
   let nav = useNavigate();
   listRenja.init()
  
