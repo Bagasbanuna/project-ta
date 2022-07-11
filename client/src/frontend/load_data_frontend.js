@@ -1,5 +1,5 @@
 import axios from "axios";
-import { dataProfile, listJurusan } from "../store";
+import { ambilDataStuktur, dataProfile, listJurusan } from "../store";
 
 async function ProfileData() {
   let body = JSON.parse(window.localStorage.getItem("user"));
@@ -28,8 +28,22 @@ async function ListJurusan() {
   })
 }
 
+function GetDataStuktur(){
+  axios.get("http://localhost:5000/api/v1/strukturOrganisasi")
+  .then((a) =>
+  ambilDataStuktur.val = a.data,
+     
+  )
+}
+
+// async function GetDataStuktur(){
+//   const data = await axios.get("http://localhost:5000/api/v1/strukturOrganisasi")
+//   ambilDataStuktur.val = data.data
+//   console.log(JSON.stringify(data.data))
+// }
+
 export { 
   ProfileData,
   ListJurusan,
-
+  GetDataStuktur
 };

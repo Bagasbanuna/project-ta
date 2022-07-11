@@ -15,7 +15,8 @@ const { routeStatusRenja, UpdateStatus } = require("./controllers/status_renja")
 const { GetUser, CreateUser, UpdateUser, DeleteUser } = require("./controllers/users");
 const { GetUserInclude } = require("./controllers/user_include");
 const { routeUpload } = require("./upload");
-const { DashOn } = require("./controllers/for_dashboard");
+const { DashOn, DashAcc, DashDone, DashCcl} = require("./controllers/for_dashboard");
+const { GetStatusOrganisasi } = require("./controllers/for_struktur_organisasi");
 const api = express.Router()
 
 api.use('/upload', routeUpload);
@@ -111,5 +112,13 @@ api.get('/userInclude', GetUserInclude)
 
 //Dashboard
 api.get('/dashboardOn', DashOn)
+api.get('/dashboardAcc', DashAcc)
+api.get('/dashboardDone', DashDone)
+api.get('/dashboardCcl', DashCcl)
+
+//StrukturOrganisasi
+api.get('/strukturOrganisasi', GetStatusOrganisasi)
+
+
 
 module.exports = {api}

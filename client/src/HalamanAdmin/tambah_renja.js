@@ -51,6 +51,14 @@ function TambahRenja() {
             <div className="btn-group me-2"></div>
           </div>
         </div>
+        <Tombol
+        title={"Kembali"}
+        warna="secondary"
+        onClick={() =>{
+          nav("/halaman-admin/halaman-rencana-kerja");
+
+        }}
+        />
         <div className="">
           <div>
             <label className="form-lebel">Judul</label>

@@ -14,7 +14,7 @@ function Berita() {
 
   if (renjaDone.val.length < 1) {
     statusRenjaDone();
-    console.log(JSON.stringify(statusRenjaDone));
+    // console.log(JSON.stringify(statusRenjaDone));
   }
 
   return (
@@ -38,12 +38,12 @@ function Berita() {
                   </p>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                      <button
+                      {/* <button
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
                       >
                         Lihat
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>

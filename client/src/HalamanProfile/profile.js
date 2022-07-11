@@ -143,13 +143,13 @@ function TampilanProfile() {
           />
           <hr />
           <div>
-            <label className="p-2">Foto KTP : </label>
+            {/* <label className="p-2">Foto KTP : </label>
             <img
               className="border border-primary"
               style={{ width: "100%", height: 150 }}
               src={"http://localhost:5000/images/" + antiKtp(dataProfile.val)}
             />
-            {/* {dataProfile.val.} */}
+            {dataProfile.val.} */}
           </div>
 
           <hr />
@@ -264,6 +264,8 @@ function antiKtp(data) {
     return "kosong.jpg";
   }
 }
+
+// data = isinya apa yang dikirim dari atas
 function antiFotoP(data) {
   try {
     console.log(data.profile.FotoProfile[0].gambarProfile);

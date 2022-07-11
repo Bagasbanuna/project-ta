@@ -40,7 +40,7 @@ function TombolLogin() {
   let adaUser = window.localStorage.getItem("user") === null;
   let nav = useNavigate();
 
-  console.log (window.localStorage.getItem("user"))
+  // console.log (window.localStorage.getItem("user"))
   return adaUser ? (
     <div>
       <Tombol

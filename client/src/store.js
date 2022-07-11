@@ -17,9 +17,13 @@ const renjaCancel = new Rx("renjaCancel", []);
 //CLIENT
 const dataProfile = new Rx("dataProfile", []);
 const listJurusan = new Rx("listJurusan", [])
+const ambilDataStuktur = new Rx("ambilDataStuktur", [])
 
 //Dashboard
 const DashboardOn = new Rx("DashboardOn", [])
+const DashboardAcc = new Rx("DashboardAcc", [])
+const DashboardDone = new Rx("DashboardDone", [])
+const DashboardCcl = new Rx("DashboardCcl", [])
 
 const store = configureStore({
   reducer: {
@@ -39,9 +43,13 @@ const store = configureStore({
     //Client
     dataProfile: dataProfile.reducer,
     listJurusan: listJurusan.reducer,
+    ambilDataStuktur: ambilDataStuktur.reducer,
 
     //Dashboard
-    DashboardOn: DashboardOn.reducer
+    DashboardOn: DashboardOn.reducer,
+    DashboardAcc: DashboardAcc.reducer,
+    DashboardDone: DashboardDone.reducer,
+    DashboardCcl: DashboardCcl.reducer
   },
 });
 
@@ -61,8 +69,12 @@ export {
   //Client
   dataProfile,
   listJurusan,
+  ambilDataStuktur,
 
   //Dashboard
-  DashboardOn
+  DashboardOn,
+  DashboardAcc,
+  DashboardDone,
+  DashboardCcl
 
 };

@@ -112,15 +112,15 @@ function IsiAgt({ state }) {
             <tr>
               <th>NIM</th>
               <th>Nama Depan</th>
-              {/* <th>Nama Belakang</th> */}
+              <th>Nama Belakang</th>
               <th>Alamat</th>
               <th>Tempat Lahir</th>
               <th>Tanggal Lahir</th>
-              {/* <th>Jenis Kelamin</th>
-              <th>Nomor HP</th> */}
+              <th>Jenis Kelamin</th>
+              <th>Nomor HP</th>
               <th>Angkatan</th>
-              <th>Foto</th>
-              <th>Foto KTP</th>
+              {/* <th>Foto</th> 
+              <th>Foto KTP</th> */}
               <th>Aksi</th>
             </tr>
           </thead>
@@ -130,15 +130,15 @@ function IsiAgt({ state }) {
                 <tr key={a.Id}>
                   <td>{antiNull(a, "nim")}</td>
                   <td>{antiNull(a, "namaDepan")}</td>
-                  {/* <td>{antiNull(a,"namaBelakang")}</td> */}
+                  <td>{antiNull(a,"namaBelakang")}</td>
                   <td>{antiNull(a, "alamat")}</td>
                   <td>{antiNull(a, "tempatLahir")}</td>
                   <td>{antiNull(a, "tanggalLahir")}</td>
-                  {/* <td>{antiNull(a,"jenisKelamin")}</td>
-                  <td>{antiNull(a,"nomorHp")}</td> */}
+                  <td>{antiNull(a,"jenisKelamin")}</td>
+                  <td>{antiNull(a,"nomorHp")}</td>
                   <td>{antiNull(a, "tahunAngkatan")}</td>
-                  <td>{antiNull(a, "fotoKtp")}</td>
-                  <td>{antiNull(a, "fotoProfile")}</td>
+                  {/* <td>{antiNull(a, "fotoKtp")}</td>
+                  <td>{antiNull(a, "fotoProfile")}</td> */}
                   <td>
                     <Tombol
                       title={"Edit"}

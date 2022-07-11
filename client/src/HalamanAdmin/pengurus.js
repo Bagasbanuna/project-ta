@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
 import { useNavigate } from "react-router-dom";
+import { ProfileData } from "../frontend/load_data_frontend";
 import { Tombol } from "../lib/button";
+import { dataProfile } from "../store";
 
 // YANG BISA DI MAP HANYA ARRAY
 
@@ -112,6 +114,13 @@ function cekJbtn(data) {
  */
 function Wadah({ upd, state }) {
   let nav = useNavigate();
+
+  // dataProfile.init()
+  // if(dataProfile.val.length < 1){
+  //   ProfileData()
+  //   console.log(JSON.stringify(dataProfile.val))
+  // }
+
   return (
     <div>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -140,8 +149,8 @@ function Wadah({ upd, state }) {
                 <th>Jenis Kelamin</th>
                 <th>Nomor HP</th>
                 <th>Angkatan</th>
-                <th>Foto</th>
-                <th>Foto KTP</th>
+                {/* <th>Foto</th> */}
+                {/* <th>Foto KTP</th> */}
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -164,14 +173,15 @@ function Wadah({ upd, state }) {
                     <td>{cekPofile(e, "jenisKelamin")}</td>
                     <td>{cekPofile(e, "nomorHp")}</td>
                     <td>{cekPofile(e, "tahunAngkatan")}</td>
-                    <td>{cekPofile(e, "fotoProfile")}</td>
-                    <td>{cekPofile(e, "fotoKtp")}</td>
+                    {/* <td>{cekPofile(e, "fotoProfile")}</td> */}
+                    {/* <td>{cekPofile(e, "fotoKtp")}</td> */}
                     <td>
                       <div className="row">
+                        <div className="col">                       
                         <Tombol
                           title={"Edit"}
                           warna={"success"}
-                          className={"btn btn-sm"}
+                          className={" btn btn-sm"}
                           onClick={() => {
                             state.updateData = e;
                             nav("/halaman-admin/halaman-update-pengurus", {
@@ -179,11 +189,15 @@ function Wadah({ upd, state }) {
                             });
                           }}
                         ></Tombol>
+                         </div>
+
+                         <div className="col">
+
 
                         <Tombol
                           title={"Hapus"}
                           warna={"danger"}
-                          className={" btn btn-sm"}
+                          className={"col btn btn-sm"}
                           onClick={() => {
                             axios
                               .delete(
@@ -204,6 +218,8 @@ function Wadah({ upd, state }) {
                             // console.log(e.profile.Id)
                           }}
                         />
+                         </div>
+
                       </div>
                     </td>
                   </tr>
@@ -224,7 +240,7 @@ class App extends Component {
       this.updateData(e.data);
     });
   }
-
+  
   constructor(props) {
     // axios.get('http://localhost:5000/api/v1/jabatan').then(j=> this.updateState(j.data))
 

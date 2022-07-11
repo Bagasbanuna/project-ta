@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  DashboardAcc,
+  DashboardCcl,
+  DashboardDone,
   DashboardOn,
   listRenja,
   listStatus,
@@ -13,6 +16,24 @@ async function DashStatusOn() {
   const data = await axios.get("http://localhost:5000/api/v1/dashboardOn");
   DashboardOn.val = data.data;
   console.log(data.data);
+}
+
+async  function DashStatusAcc(){
+  const data = await axios.get("http://localhost:5000/api/v1/dashboardAcc")
+  DashboardAcc.val = data.data
+  console.log(data.data, "Status ACC")
+}
+
+async function DashStatusDone(){
+  const data = await axios.get("http://localhost:5000/api/v1/dashboardDone")
+  DashboardDone.val = data.data
+  console.log(data.data, "Status Done")
+}
+
+async function DashStatusCcl(){
+  const data = await axios.get("http://localhost:5000/api/v1/dashboardCcl")
+  DashboardCcl.val = data.data
+  console.log(data.data, "Status Cencel")
 }
 
 async function ambilDataRenja() {
@@ -48,7 +69,7 @@ async function statusRenjaDone() {
     "http://localhost:5000/api/v1/rencanakerja/statusdone"
   );
   renjaDone.val = data.data;
-  console.log(data.data);
+  // console.log(data.data);
 }
 
 function statusRenjaCancel() {
@@ -79,4 +100,7 @@ export {
   loadKabeh,
   //Dashboard
   DashStatusOn,
+  DashStatusAcc,
+  DashStatusDone,
+  DashStatusCcl
 };
